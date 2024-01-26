@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfn8ki3v0cnec"]
 
-[ext_resource type="Script" path="res://Levels/BG.gd" id="1_m04bf"]
+[ext_resource type="Script" path="res://UI/BG.gd" id="1_m04bf"]
 [ext_resource type="Texture2D" uid="uid://dykw1rtvdc1oy" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/Background/back.png" id="2_4843r"]
 [ext_resource type="Texture2D" uid="uid://c8jjh3johw1iw" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/Background/middle.png" id="3_8y724"]
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://63u5qfftv5h6"]
 
-[ext_resource type="Script" path="res://Levels/BG.gd" id="1_e7a7g"]
+[ext_resource type="Script" path="res://UI/BG.gd" id="1_e7a7g"]
 [ext_resource type="Texture2D" uid="uid://dykw1rtvdc1oy" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/Background/back.png" id="2_nn8w2"]
 [ext_resource type="Texture2D" uid="uid://byofmrxyp04fd" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/tileset.png" id="3_hh10r"]
 [ext_resource type="PackedScene" uid="uid://b7uex0uqnjywk" path="res://Mobs/Frog/frog.tscn" id="4_jcv1k"]
-[ext_resource type="PackedScene" uid="uid://chsrxhxrmrhg8" path="res://Player/Player.tscn" id="5_2wj06"]
+[ext_resource type="PackedScene" uid="uid://chsrxhxrmrhg8" path="res://Player/player.tscn" id="5_2wj06"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fo2qs"]
 texture = ExtResource("3_hh10r")
