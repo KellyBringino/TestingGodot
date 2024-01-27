@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://63u5qfftv5h6"]
+[gd_scene load_steps=9 format=3 uid="uid://63u5qfftv5h6"]
 
 [ext_resource type="Script" path="res://UI/BG.gd" id="1_e7a7g"]
 [ext_resource type="Texture2D" uid="uid://dykw1rtvdc1oy" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/Background/back.png" id="2_nn8w2"]
 [ext_resource type="Texture2D" uid="uid://byofmrxyp04fd" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/tileset.png" id="3_hh10r"]
 [ext_resource type="PackedScene" uid="uid://b7uex0uqnjywk" path="res://Mobs/Frog/frog.tscn" id="4_jcv1k"]
 [ext_resource type="PackedScene" uid="uid://chsrxhxrmrhg8" path="res://Player/player.tscn" id="5_2wj06"]
-[ext_resource type="PackedScene" uid="uid://bioc3v8hqtola" path="res://Items/Cherry.tscn" id="6_5w5ew"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fo2qs"]
 texture = ExtResource("3_hh10r")
@@ -417,52 +416,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	text = \"HP: \" + str(Game.playerHP)
-"
-
-[sub_resource type="GDScript" id="GDScript_s1epb"]
-script/source = "extends Label
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	text = \"Gold: \" + str(Game.Gold)
-"
-
-[sub_resource type="GDScript" id="GDScript_irgqo"]
-script/source = "extends Node2D
-
-var paused = false
-
-func _ready():
-	hide()
-
-func _input(event):
-	if event.is_action_pressed(\"ui_menu\"):
-		pause()
-
-func _on_resume_button_pressed():
-	if paused:
-		pause()
-
-func _on_menu_button_pressed():
-	get_tree().paused = false
-	get_tree().change_scene_to_file(\"res://UI/main.tscn\")
-
-func pause():
-	if paused:
-		hide()
-		get_tree().paused = false
-		paused = false
-	else:
-		show()
-		get_tree().paused = true
-		paused = true
+	text = \"HP: \" + str(get_node(\"../../Player/Player\").health)
 "
 
 [node name="World" type="Node2D"]
@@ -488,100 +442,33 @@ layer_0/tile_data = PackedInt32Array(1441792, 327680, 3, 1441793, 196608, 1, 144
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="Frog" parent="Mobs" instance=ExtResource("4_jcv1k")]
-position = Vector2(831, 136)
-
-[node name="Frog2" parent="Mobs" instance=ExtResource("4_jcv1k")]
-position = Vector2(966, 221)
-
-[node name="Frog3" parent="Mobs" instance=ExtResource("4_jcv1k")]
-position = Vector2(1099, 246)
-
-[node name="Frog4" parent="Mobs" instance=ExtResource("4_jcv1k")]
-position = Vector2(1191, 190)
-
-[node name="Frog5" parent="Mobs" instance=ExtResource("4_jcv1k")]
-position = Vector2(1018, 160)
+position = Vector2(407, 147)
 
 [node name="Player" type="Node2D" parent="."]
 
 [node name="Player" parent="Player" instance=ExtResource("5_2wj06")]
 position = Vector2(208, 149)
 
-[node name="Items" type="Node2D" parent="."]
-
-[node name="Cherry" parent="Items" instance=ExtResource("6_5w5ew")]
-position = Vector2(507, 289)
-
-[node name="Cherry2" parent="Items" instance=ExtResource("6_5w5ew")]
-position = Vector2(441, 288)
-
-[node name="Cherry3" parent="Items" instance=ExtResource("6_5w5ew")]
-position = Vector2(359, 279)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HP label" type="Label" parent="CanvasLayer"]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 60.0
-offset_bottom = 50.0
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 56.0
+offset_bottom = 35.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 21
 text = "HP"
 script = SubResource("GDScript_wx42q")
 
-[node name="Gold label" type="Label" parent="CanvasLayer"]
-offset_left = 20.0
-offset_top = 50.0
-offset_right = 60.0
-offset_bottom = 80.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 21
-text = "HP"
-script = SubResource("GDScript_s1epb")
+[node name="Frog" parent="." instance=ExtResource("4_jcv1k")]
+position = Vector2(542, 232)
 
-[node name="Pause Menu" type="Node2D" parent="CanvasLayer"]
-process_mode = 3
-script = SubResource("GDScript_irgqo")
+[node name="Frog2" parent="." instance=ExtResource("4_jcv1k")]
+position = Vector2(675, 257)
 
-[node name="BG" type="ColorRect" parent="CanvasLayer/Pause Menu"]
-offset_left = 20.0
-offset_top = 100.0
-offset_right = 820.0
-offset_bottom = 500.0
-color = Color(0.513726, 0.513726, 0.513726, 0.796078)
+[node name="Frog3" parent="." instance=ExtResource("4_jcv1k")]
+position = Vector2(767, 201)
 
-[node name="Pause Label" type="Label" parent="CanvasLayer/Pause Menu"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 322.0
-offset_top = 139.0
-offset_right = 496.0
-offset_bottom = 222.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
-text = "Pause"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Resume Button" type="Button" parent="CanvasLayer/Pause Menu"]
-offset_left = 113.0
-offset_top = 295.0
-offset_right = 363.0
-offset_bottom = 345.0
-text = "Resume"
-
-[node name="Menu Button" type="Button" parent="CanvasLayer/Pause Menu"]
-offset_left = 437.0
-offset_top = 298.0
-offset_right = 687.0
-offset_bottom = 348.0
-text = "Main Menu"
-
-[connection signal="pressed" from="CanvasLayer/Pause Menu/Resume Button" to="CanvasLayer/Pause Menu" method="_on_resume_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Pause Menu/Menu Button" to="CanvasLayer/Pause Menu" method="_on_menu_button_pressed"]
+[node name="Frog4" parent="." instance=ExtResource("4_jcv1k")]
+position = Vector2(594, 171)
