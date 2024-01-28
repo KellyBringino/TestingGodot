@@ -1,0 +1,164 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5ldm07fxoj28"]
+
+[ext_resource type="PackedScene" uid="uid://cfn8ki3v0cnec" path="res://UI/bg.tscn" id="1_hatvj"]
+
+[sub_resource type="GDScript" id="GDScript_4mq6k"]
+script/source = "extends CanvasLayer
+
+const levelButtons = [
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 1\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 2\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 3\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 4\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 5\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 6\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 7\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 8\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 9\"
+]
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var unl = Game.levelUnlocked
+	for i in range(9):
+		if !unl[i]:
+			get_node(levelButtons[i]).disabled = true
+
+func _on_main_menu_button_pressed():
+	Utils.returnToMainMenu()
+
+func _on_level_1_pressed():
+	Utils.loadLevel(0)
+
+"
+
+[node name="Level Select" type="Node2D"]
+
+[node name="BG" parent="." instance=ExtResource("1_hatvj")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(15, 15)
+transform = Transform2D(1, 0, 0, 1, 15, 15)
+script = SubResource("GDScript_4mq6k")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -15.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="Header Container" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_bottom = 80
+
+[node name="Header" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container"]
+layout_mode = 2
+
+[node name="Main Menu Container" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 200
+
+[node name="Main Menu Button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header/Main Menu Container"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Level Label Container" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Level Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header/Level Label Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Levels"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Level Buttons and BG Container" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="Level Buttons Background" type="ColorRect" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.266667, 0.266667, 0.266667, 0.87451)
+
+[node name="Level Buttons Container" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Level Buttons" type="GridContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container"]
+layout_mode = 2
+theme_override_constants/h_separation = 255
+theme_override_constants/v_separation = 50
+columns = 3
+
+[node name="Level 1" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Level 2" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Level 3" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Level 4" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Level 5" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Level 6" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Level 7" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Level 8" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Level 9" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header/Main Menu Container/Main Menu Button" to="CanvasLayer" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 1" to="CanvasLayer" method="_on_level_1_pressed"]

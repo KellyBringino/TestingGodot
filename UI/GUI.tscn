@@ -1,0 +1,319 @@
+[gd_scene load_steps=20 format=3 uid="uid://drl8eve0lfv7f"]
+
+[ext_resource type="Texture2D" uid="uid://ds1q7uwdkfg3p" path="res://Sprites/GUI/label_HP_bg.png" id="1_uk7i4"]
+[ext_resource type="Texture2D" uid="uid://diligo4fagbyx" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/player.png" id="2_uypy0"]
+[ext_resource type="Texture2D" uid="uid://ck7wc2t7ck3fy" path="res://Sprites/GUI/lifebar_bg.png" id="3_1gpp7"]
+[ext_resource type="Texture2D" uid="uid://cw4jv05eyhv2j" path="res://Sprites/GUI/lifebar_fill.png" id="4_3opk2"]
+[ext_resource type="Texture2D" uid="uid://boc18aqpemsxc" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/gem.png" id="5_gcb0e"]
+
+[sub_resource type="GDScript" id="GDScript_a0qls"]
+script/source = "extends MarginContainer
+
+var paused = false
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	get_node(\"VBoxContainer/Pause Menu\").hide()
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	get_node(\"VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Count/BackGround/Number\").text = str(Game.playerHP)
+	get_node(\"VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Gauge\").value = float( Game.playerHP)
+	get_node(\"VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count/BackGround/Number\").text = str(Game.Gems)
+
+func _input(event):
+	if event.is_action_pressed(\"ui_menu\"):
+		pause()
+
+func _on_resume_button_pressed():
+	if paused:
+		pause()
+
+func _on_menu_button_pressed():
+	get_tree().paused = false
+	Utils.returnToMainMenu()
+
+func pause():
+	if paused:
+		get_node(\"VBoxContainer/Pause Menu\").hide()
+		get_tree().paused = false
+		paused = false
+	else:
+		get_node(\"VBoxContainer/Pause Menu\").show()
+		get_tree().paused = true
+		paused = true
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0umk"]
+atlas = ExtResource("2_uypy0")
+region = Rect2(0, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6ox4"]
+atlas = ExtResource("2_uypy0")
+region = Rect2(33, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcu37"]
+atlas = ExtResource("2_uypy0")
+region = Rect2(66, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coaxq"]
+atlas = ExtResource("2_uypy0")
+region = Rect2(99, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a8ki"]
+atlas = ExtResource("2_uypy0")
+region = Rect2(132, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57nmh"]
+atlas = ExtResource("2_uypy0")
+region = Rect2(165, 32, 33, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dfujy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0umk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6ox4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcu37")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_coaxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1a8ki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57nmh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2e3gw"]
+atlas = ExtResource("5_gcb0e")
+region = Rect2(0, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agviw"]
+atlas = ExtResource("5_gcb0e")
+region = Rect2(15, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p4jm"]
+atlas = ExtResource("5_gcb0e")
+region = Rect2(30, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gyrb7"]
+atlas = ExtResource("5_gcb0e")
+region = Rect2(45, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfntq"]
+atlas = ExtResource("5_gcb0e")
+region = Rect2(60, 0, 15, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uw4op"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2e3gw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agviw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p4jm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyrb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfntq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="GUI" type="MarginContainer"]
+process_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 83.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+script = SubResource("GDScript_a0qls")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Health and Gems" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Health bar containter" type="MarginContainer" parent="VBoxContainer/MarginContainer/Health and Gems"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HealthBar" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter"]
+layout_mode = 2
+
+[node name="Count" type="MarginContainer" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar"]
+layout_mode = 2
+
+[node name="BackGround" type="NinePatchRect" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Count"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+texture = ExtResource("1_uk7i4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Count/BackGround"]
+position = Vector2(0, -10)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_dfujy")
+autoplay = "default"
+centered = false
+
+[node name="Number" type="Label" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Count/BackGround"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Gauge" type="TextureProgressBar" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar"]
+layout_mode = 2
+max_value = 10.0
+value = 10.0
+texture_under = ExtResource("3_1gpp7")
+texture_progress = ExtResource("4_3opk2")
+
+[node name="Counters" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Health and Gems"]
+layout_mode = 2
+
+[node name="Gem Count" type="MarginContainer" parent="VBoxContainer/MarginContainer/Health and Gems/Counters"]
+layout_mode = 2
+
+[node name="BackGround" type="NinePatchRect" parent="VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count"]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+texture = ExtResource("1_uk7i4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count/BackGround"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count/BackGround/HBoxContainer"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_uw4op")
+autoplay = "default"
+centered = false
+offset = Vector2(-10, 0)
+
+[node name="Number" type="Label" parent="VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count/BackGround"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "100
+"
+vertical_alignment = 1
+
+[node name="Pause Menu" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 20
+
+[node name="BackGround" type="ColorRect" parent="VBoxContainer/Pause Menu"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.447059, 0.447059, 0.447059, 0.972549)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Pause Menu"]
+layout_mode = 2
+
+[node name="Container" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Container6" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Pause Label" type="Label" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Container2" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="MarginContainer" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Pause Menu/VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="Resume Button" type="Button" parent="VBoxContainer/Pause Menu/VBoxContainer/Buttons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Resume"
+
+[node name="Menu Button" type="Button" parent="VBoxContainer/Pause Menu/VBoxContainer/Buttons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main Menu"
+
+[node name="Container3" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Container4" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Container7" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Container5" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/Pause Menu/VBoxContainer/Buttons/HBoxContainer/Resume Button" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Pause Menu/VBoxContainer/Buttons/HBoxContainer/Menu Button" to="." method="_on_menu_button_pressed"]

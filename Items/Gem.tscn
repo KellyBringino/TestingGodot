@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://dbp2wcj1c056a"]
+
+[ext_resource type="Texture2D" uid="uid://boc18aqpemsxc" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/gem.png" id="1_n7xd2"]
+
+[sub_resource type="GDScript" id="GDScript_qtx7f"]
+script/source = "extends Area2D
+
+
+func _on_body_entered(body):
+	if body.name == \"Player\":
+		Game.Gems += 5
+		queue_free()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3an1c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mustl"]
+atlas = ExtResource("1_n7xd2")
+region = Rect2(0, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxjsu"]
+atlas = ExtResource("1_n7xd2")
+region = Rect2(15, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i473u"]
+atlas = ExtResource("1_n7xd2")
+region = Rect2(30, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukjeq"]
+atlas = ExtResource("1_n7xd2")
+region = Rect2(45, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkaau"]
+atlas = ExtResource("1_n7xd2")
+region = Rect2(60, 0, 15, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lu0o0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mustl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxjsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i473u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukjeq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkaau")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Gem" type="Area2D"]
+script = SubResource("GDScript_qtx7f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3an1c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.89999, 1.89999)
+sprite_frames = SubResource("SpriteFrames_lu0o0")
+autoplay = "default"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

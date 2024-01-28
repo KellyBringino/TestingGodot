@@ -8,7 +8,7 @@ script/source = "extends Area2D
 
 func _on_body_entered(body):
 	if body.name == \"Player\":
-		Game.Gold += 4
+		Game.heal(2)
 		queue_free()
 "
 

@@ -6,14 +6,19 @@ var chase = false
 var SPEED = 100.0
 var STOP_SPEED = 300.0
 var fading = false
+var headBounce = 300
+var damageBounce = 200
 
 func _ready():
 	get_node("AnimatedSprite2D").play("Idle")
+	player = get_node("../../Player/Player")
 
 func _physics_process(delta):
 	if !fading:
+		#basic physics
 		velocity.y += gravity * delta
-		player = get_node("../../Player/Player")
+		
+		#movement
 		var direction = (player.position - self.position).normalized()
 		if direction.x != 0 && chase == true:
 			get_node("AnimatedSprite2D").play("Jump")
@@ -23,33 +28,43 @@ func _physics_process(delta):
 			get_node("AnimatedSprite2D").play("Idle")
 			velocity.x = move_toward(velocity.x, 0, STOP_SPEED)
 		
+		#flip sprite when moving
 		if velocity.x > 0:
 			get_node("AnimatedSprite2D").flip_h = true
 		elif velocity.x < 0:
 			get_node("AnimatedSprite2D").flip_h = false
+		
+		#make sure frog can move
 		move_and_slide()
 
+#when frog can see the player
 func _on_player_detection_body_entered(body):
 	if body.name == "Player":
 		chase = true
 
+#when frog cant see player
 func _on_player_detection_body_exited(body):
 	if body.name == "Player":
 		chase = false
 
-
+#when player jumps on frogs head
 func _on_player_death_body_entered(body):
-	if body.name == "Player":
+	if body.name == "Player" && !fading:
+		var direction = (player.position - self.position).normalized()
+		body.velocity += direction * headBounce
 		death()
 
-
+#when player runs into frog
 func _on_player_collision_body_entered(body):
 	if body.name == "Player" && !fading:
-		Game.playerHP -= 3
+		body.damage(3)
+		var direction = (player.position - self.position).normalized()
+		body.velocity += direction * damageBounce
 		death()
 
+#when frog dies
 func death():
-	Game.Gold += 5
+	Game.Gems += 3
 	Utils.saveGame()
 	fading = true
 	get_node("CollisionShape2D").set_process(false)
