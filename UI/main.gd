@@ -4,7 +4,7 @@ func _ready():
 	if FileAccess.file_exists("res://savegame.bin"):
 		Utils.loadGame()
 	else:
-		get_node("Continue Button").disabled = true
+		get_node("CanvasLayer/MarginContainer/VBoxContainer/Continue Container/Continue Button").disabled = true
 
 func _on_continue_button_pressed():
 	Utils.levelSelect()
