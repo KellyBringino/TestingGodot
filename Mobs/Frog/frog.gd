@@ -16,17 +16,21 @@ func _ready():
 func _physics_process(delta):
 	if !fading:
 		#basic physics
-		velocity.y += gravity * delta
+		if not is_on_floor():
+			velocity.y += gravity * delta
 		
 		#movement
 		var direction = (player.position - self.position).normalized()
 		if direction.x != 0 && chase == true:
-			get_node("AnimatedSprite2D").play("Jump")
 			velocity.x = direction.x * SPEED
 		else:
-			
-			get_node("AnimatedSprite2D").play("Idle")
 			velocity.x = move_toward(velocity.x, 0, STOP_SPEED)
+		
+		#handle animation
+		if velocity.x != 0:
+			get_node("AnimatedSprite2D").play("Jump")
+		else:
+			get_node("AnimatedSprite2D").play("Idle")
 		
 		#flip sprite when moving
 		if velocity.x > 0:
