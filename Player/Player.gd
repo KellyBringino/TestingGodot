@@ -60,3 +60,6 @@ func damage(amount):
 		fading = true
 		await anim.animation_finished
 		Utils.returnToMainMenu()
+
+func trap(damage):
+	damage(damage)

@@ -895,29 +895,6 @@ position = Vector2(438, 276)
 [node name="Gem3" parent="Items" instance=ExtResource("8_8aysw")]
 position = Vector2(466, 351)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-offset = Vector2(310, 0)
-transform = Transform2D(1, 0, 0, 1, 310, 0)
-
-[node name="BG" type="ParallaxBackground" parent="CanvasLayer"]
-offset = Vector2(0, -100)
-transform = Transform2D(1, 0, 0, 1, 0, -100)
-script = ExtResource("1_e7a7g")
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/BG"]
-motion_mirroring = Vector2(1151, 0)
-
-[node name="Back" type="Sprite2D" parent="CanvasLayer/BG/ParallaxLayer"]
-scale = Vector2(3, 3)
-texture = ExtResource("2_nn8w2")
-centered = false
-
-[node name="GUI" parent="CanvasLayer" instance=ExtResource("7_s7cjv")]
-visible = false
-offset_left = -322.0
-offset_right = -322.0
-offset_bottom = 93.0
-
 [node name="Hazards" type="Node2D" parent="."]
 
 [node name="SpikeTrap" parent="Hazards" instance=ExtResource("10_pd66j")]
@@ -949,3 +926,25 @@ position = Vector2(1512, 440)
 
 [node name="SpikeTrap10" parent="Hazards" instance=ExtResource("10_pd66j")]
 position = Vector2(1528, 440)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(310, 0)
+transform = Transform2D(1, 0, 0, 1, 310, 0)
+
+[node name="BG" type="ParallaxBackground" parent="CanvasLayer"]
+offset = Vector2(0, -100)
+transform = Transform2D(1, 0, 0, 1, 0, -100)
+script = ExtResource("1_e7a7g")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/BG"]
+motion_mirroring = Vector2(1151, 0)
+
+[node name="Back" type="Sprite2D" parent="CanvasLayer/BG/ParallaxLayer"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_nn8w2")
+centered = false
+
+[node name="GUI" parent="CanvasLayer" instance=ExtResource("7_s7cjv")]
+offset_left = -322.0
+offset_right = -322.0
+offset_bottom = 93.0
