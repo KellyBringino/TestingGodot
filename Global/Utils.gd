@@ -1,6 +1,6 @@
 extends Node
 
-const SAVE_PATH = "res://savegame.bin"
+const SAVE_PATH = "res://Save/savegame.bin"
 
 const levels = [
 	"res://Levels/world.tscn"

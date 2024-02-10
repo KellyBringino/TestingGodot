@@ -1,7 +1,7 @@
 extends Node2D
 
 func _ready():
-	if FileAccess.file_exists("res://savegame.bin"):
+	if FileAccess.file_exists(Utils.SAVE_PATH):
 		Utils.loadGame()
 	else:
 		get_node("CanvasLayer/MarginContainer/VBoxContainer/Continue Container/Continue Button").disabled = true
