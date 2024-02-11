@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://tp2i7nbhkth4"]
+[gd_scene load_steps=4 format=3 uid="uid://tp2i7nbhkth4"]
 
 [ext_resource type="Script" path="res://Hazards/SpikeTrap.gd" id="1_pyxdv"]
+[ext_resource type="Texture2D" uid="uid://cc74yk5i38ji3" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/Props/spikes.png" id="2_68jig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aucv8"]
 
@@ -10,5 +11,10 @@ script = ExtResource("1_pyxdv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_aucv8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 3)
+scale = Vector2(1.06333, 1.1)
+texture = ExtResource("2_68jig")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

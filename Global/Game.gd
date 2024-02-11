@@ -13,3 +13,10 @@ func heal(amount):
 		playerHP += amount
 		if playerHP > 10:
 			playerHP = 10
+
+func frogDefeated():
+	Game.Gems += 3
+	Utils.saveGame()
+
+func gemPickup():
+	Gems += 5

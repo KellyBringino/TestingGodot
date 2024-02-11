@@ -8,9 +8,12 @@ var STOP_SPEED = 300.0
 var fading = false
 var headBounce = 300
 var damageBounce = 200
+var jumpTimer = 150
+var jumpBoost = 300
+@onready var anim = get_node("AnimationPlayer")
 
 func _ready():
-	get_node("AnimatedSprite2D").play("Idle")
+	anim.play("Idle")
 	player = get_node("../../Player/Player")
 
 func _physics_process(delta):
@@ -21,16 +24,27 @@ func _physics_process(delta):
 		
 		#movement
 		var direction = (player.position - self.position).normalized()
-		if direction.x != 0 && chase == true:
-			velocity.x = direction.x * SPEED
-		else:
+		
+		if is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, STOP_SPEED)
+			if chase && is_on_floor() && jumpTimer <= 0:
+				if direction.x > 0:
+					velocity = Vector2(1.0,-1.0).normalized() * jumpBoost
+				elif direction.x < 0:
+					velocity = Vector2(-1.0,-1.0).normalized() * jumpBoost
+				jumpTimer = 200
+				anim.play("Jump")
+		
+		if jumpTimer > 0:
+			jumpTimer -= 1
 		
 		#handle animation
-		if velocity.x != 0:
-			get_node("AnimatedSprite2D").play("Jump")
+		if velocity.y < 0:
+			anim.play("Jump")
+		elif velocity.y > 0:
+			anim.play("Fall")
 		else:
-			get_node("AnimatedSprite2D").play("Idle")
+			anim.play("Idle")
 		
 		#flip sprite when moving
 		if velocity.x > 0:
@@ -68,10 +82,9 @@ func _on_player_collision_body_entered(body):
 
 #when frog dies
 func death():
-	Game.Gems += 3
-	Utils.saveGame()
+	Game.frogDefeated()
 	fading = true
 	get_node("CollisionShape2D").set_process(false)
-	get_node("AnimatedSprite2D").play("Death")
-	await get_node("AnimatedSprite2D").animation_finished
+	anim.play("Death")
+	await anim.animation_finished
 	self.queue_free()
