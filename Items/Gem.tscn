@@ -7,7 +7,7 @@ script/source = "extends Area2D
 
 
 func _on_body_entered(body):
-	if body.name == \"Player\":
+	if body.editor_description.contains(\"Player\"):
 		Game.gemPickup()
 		queue_free()
 "

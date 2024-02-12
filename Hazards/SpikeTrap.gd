@@ -3,5 +3,5 @@ extends Area2D
 
 
 func _on_body_entered(body):
-	if body.name == "Player":
-		body.trap(10)
+	if body.editor_description.contains("Player"):
+		body.trap()

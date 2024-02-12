@@ -8,7 +8,7 @@ var STOP_SPEED = 300.0
 var fading = false
 var headBounce = 300
 var damageBounce = 200
-var jumpTimer = 150
+var jumpTimer = false
 var jumpBoost = 300
 @onready var anim = get_node("AnimationPlayer")
 
@@ -27,16 +27,13 @@ func _physics_process(delta):
 		
 		if is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, STOP_SPEED)
-			if chase && is_on_floor() && jumpTimer <= 0:
+			if chase && is_on_floor() && jumpTimer:
 				if direction.x > 0:
 					velocity = Vector2(1.0,-1.0).normalized() * jumpBoost
 				elif direction.x < 0:
 					velocity = Vector2(-1.0,-1.0).normalized() * jumpBoost
-				jumpTimer = 200
+				jumpTimer = false
 				anim.play("Jump")
-		
-		if jumpTimer > 0:
-			jumpTimer -= 1
 		
 		#handle animation
 		if velocity.y < 0:
@@ -57,24 +54,24 @@ func _physics_process(delta):
 
 #when frog can see the player
 func _on_player_detection_body_entered(body):
-	if body.name == "Player":
+	if body.editor_description.contains("Player"):
 		chase = true
 
 #when frog cant see player
 func _on_player_detection_body_exited(body):
-	if body.name == "Player":
+	if body.editor_description.contains("Player"):
 		chase = false
 
 #when player jumps on frogs head
 func _on_player_death_body_entered(body):
-	if body.name == "Player" && !fading:
+	if body.editor_description.contains("Player") && !fading:
 		var direction = (player.position - self.position).normalized()
 		body.velocity += direction * headBounce
 		death()
 
 #when player runs into frog
 func _on_player_collision_body_entered(body):
-	if body.name == "Player" && !fading:
+	if body.editor_description.contains("Player") && !fading:
 		body.damage(3)
 		var direction = (player.position - self.position).normalized()
 		body.velocity += direction * damageBounce
@@ -88,3 +85,7 @@ func death():
 	anim.play("Death")
 	await anim.animation_finished
 	self.queue_free()
+
+
+func _on_timer_timeout():
+	jumpTimer = true

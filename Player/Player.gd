@@ -47,9 +47,7 @@ func _physics_process(delta):
 		move_and_slide()
 
 func damage(amount):
-	Game.playerHP -= amount
-	if Game.playerHP < 0:
-		Game.playerHP = 0
+	Game.damage(amount)
 	anim.play("Hurt")
 	stunned = true
 	await anim.animation_finished
@@ -61,5 +59,5 @@ func damage(amount):
 		await anim.animation_finished
 		Utils.returnToMainMenu()
 
-func trap(damage):
-	damage(damage)
+func trap():
+	damage(10)
