@@ -1,61 +1,37 @@
-[gd_scene load_steps=29 format=3 uid="uid://b7uex0uqnjywk"]
+[gd_scene load_steps=26 format=3 uid="uid://bndy5rav0g0hg"]
 
-[ext_resource type="Script" path="res://Mobs/Frog/frog.gd" id="1_uk8uc"]
-[ext_resource type="Texture2D" uid="uid://cxkrnvwvq2oct" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/enemy-deadth.png" id="1_waflo"]
-[ext_resource type="Texture2D" uid="uid://cofimv2r5yu86" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/frog-idle.png" id="2_w6d6u"]
-[ext_resource type="Texture2D" uid="uid://dwfbe4airqwnn" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/frog-jump.png" id="3_7jfbm"]
+[ext_resource type="Script" path="res://Mobs/Frog/gold_frog.gd" id="1_qb5im"]
+[ext_resource type="Texture2D" uid="uid://cxkrnvwvq2oct" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/enemy-deadth.png" id="2_lwqri"]
+[ext_resource type="Texture2D" uid="uid://c0phkl5xnohs5" path="res://Sprites/Mobs/Gold Frog/Idle/frog-idle-1.png" id="3_bddrj"]
+[ext_resource type="Texture2D" uid="uid://5gs3tpxgesc8" path="res://Sprites/Mobs/Gold Frog/Idle/frog-idle-2.png" id="4_kijkk"]
+[ext_resource type="Texture2D" uid="uid://b2k4k74yenggl" path="res://Sprites/Mobs/Gold Frog/Idle/frog-idle-3.png" id="5_4sp0n"]
+[ext_resource type="Texture2D" uid="uid://dcpgi1nauabqj" path="res://Sprites/Mobs/Gold Frog/Idle/frog-idle-4.png" id="6_qyryy"]
+[ext_resource type="Texture2D" uid="uid://b2f8dnf8pgytt" path="res://Sprites/Mobs/Gold Frog/Jump/frog-jump-1.png" id="7_xhb65"]
+[ext_resource type="Texture2D" uid="uid://bkk15lb1ef1vl" path="res://Sprites/Mobs/Gold Frog/Jump/frog-jump-2.png" id="8_573pp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r6iqf"]
-atlas = ExtResource("1_waflo")
+atlas = ExtResource("2_lwqri")
 region = Rect2(0, 0, 40, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tp1va"]
-atlas = ExtResource("1_waflo")
+atlas = ExtResource("2_lwqri")
 region = Rect2(40, 0, 40, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3hmi"]
-atlas = ExtResource("1_waflo")
+atlas = ExtResource("2_lwqri")
 region = Rect2(80, 0, 40, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d6k0l"]
-atlas = ExtResource("1_waflo")
+atlas = ExtResource("2_lwqri")
 region = Rect2(120, 0, 40, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_24731"]
-atlas = ExtResource("1_waflo")
+atlas = ExtResource("2_lwqri")
 region = Rect2(160, 0, 40, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yo3d7"]
-atlas = ExtResource("1_waflo")
+atlas = ExtResource("2_lwqri")
 region = Rect2(200, 0, 40, 41)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bbil6"]
-atlas = ExtResource("2_w6d6u")
-region = Rect2(0, 0, 35, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7csrn"]
-atlas = ExtResource("2_w6d6u")
-region = Rect2(35, 0, 35, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h7mpt"]
-atlas = ExtResource("2_w6d6u")
-region = Rect2(70, 0, 35, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fdc16"]
-atlas = ExtResource("2_w6d6u")
-region = Rect2(105, 0, 35, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i8ssc"]
-atlas = ExtResource("3_7jfbm")
-region = Rect2(0, 0, 35, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jdh75"]
-atlas = ExtResource("3_7jfbm")
-region = Rect2(35, 0, 35, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_suo8u"]
-atlas = ExtResource("3_7jfbm")
-region = Rect2(70, 0, 35, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gi16y"]
 animations = [{
@@ -84,40 +60,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bbil6")
+"texture": ExtResource("3_bddrj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bbil6")
+"texture": ExtResource("4_kijkk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bbil6")
+"texture": ExtResource("5_4sp0n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bbil6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bbil6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bbil6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bbil6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bbil6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bbil6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7csrn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h7mpt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fdc16")
+"texture": ExtResource("6_qyryy")
 }],
 "loop": true,
 "name": &"Idle",
@@ -125,13 +77,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i8ssc")
+"texture": ExtResource("7_xhb65")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jdh75")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_suo8u")
+"texture": ExtResource("8_573pp")
 }],
 "loop": false,
 "name": &"Jump",
@@ -190,7 +139,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_qcebl"]
@@ -219,7 +168,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.9, 1, 1.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 9, 10, 11]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_jnujs"]
@@ -246,7 +195,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_8dc4x"]
@@ -276,21 +225,22 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_w8hpu"]
 radius = 6.1
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_myrnu"]
-radius = 233.054
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7a18r"]
 size = Vector2(14, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h37kd"]
 size = Vector2(20, 9)
 
-[node name="Frog" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_myrnu"]
+radius = 233.054
+
+[node name="Gold Frog" type="CharacterBody2D"]
 editor_description = "Frog"
-script = ExtResource("1_uk8uc")
+script = ExtResource("1_qb5im")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -11)
+position = Vector2(0, -33)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_gi16y")
 animation = &"Idle"
 frame = 1
@@ -299,6 +249,7 @@ frame = 1
 libraries = {
 "": SubResource("AnimationLibrary_yvut1")
 }
+autoplay = "Idle"
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
@@ -306,9 +257,26 @@ wait_time = 3.0
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
+position = Vector2(0, -18)
+scale = Vector2(3, 3)
 shape = SubResource("CircleShape2D_w8hpu")
 debug_color = Color(0, 0.647059, 0.207843, 0.419608)
+
+[node name="Player Death" type="Area2D" parent="."]
+position = Vector2(0, -19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player Death"]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_7a18r")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Player Collision" type="Area2D" parent="."]
+position = Vector2(0, -13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player Collision"]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_h37kd")
+debug_color = Color(0.992157, 0, 0.235294, 0.419608)
 
 [node name="Player detection" type="Area2D" parent="."]
 visible = false
@@ -316,22 +284,8 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player detection"]
 shape = SubResource("CircleShape2D_myrnu")
 
-[node name="Player Death" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player Death"]
-position = Vector2(0, -6.5)
-shape = SubResource("RectangleShape2D_7a18r")
-debug_color = Color(0, 0.6, 0.701961, 0.419608)
-
-[node name="Player Collision" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player Collision"]
-position = Vector2(0, -4.5)
-shape = SubResource("RectangleShape2D_h37kd")
-debug_color = Color(0.992157, 0, 0.235294, 0.419608)
-
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="body_entered" from="Player detection" to="." method="_on_player_detection_body_entered"]
-[connection signal="body_exited" from="Player detection" to="." method="_on_player_detection_body_exited"]
 [connection signal="body_entered" from="Player Death" to="." method="_on_player_death_body_entered"]
 [connection signal="body_entered" from="Player Collision" to="." method="_on_player_collision_body_entered"]
+[connection signal="body_entered" from="Player detection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="Player detection" to="." method="_on_player_detection_body_exited"]

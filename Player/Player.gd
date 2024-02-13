@@ -57,7 +57,7 @@ func damage(amount):
 		anim.play("Death")
 		fading = true
 		await anim.animation_finished
-		Utils.returnToMainMenu()
+		Game.endGame(true)
 
 func trap():
 	damage(10)

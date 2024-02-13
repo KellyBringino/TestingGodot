@@ -17,10 +17,10 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	get_node(\"VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Count/BackGround/Number\").text = str(Game.playerHP)
 	get_node(\"VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Gauge\").value = float( Game.playerHP)
-	get_node(\"VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count/BackGround/Number\").text = str(Game.Gems)
+	get_node(\"VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count/BackGround/Number\").text = str(Game.currentGems)
 
 func _input(event):
 	if event.is_action_pressed(\"ui_menu\"):

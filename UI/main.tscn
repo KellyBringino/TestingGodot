@@ -1,7 +1,51 @@
-[gd_scene load_steps=3 format=3 uid="uid://cm3dbv3yqrayn"]
+[gd_scene load_steps=10 format=3 uid="uid://cm3dbv3yqrayn"]
 
 [ext_resource type="Script" path="res://UI/main.gd" id="1_0tmoe"]
 [ext_resource type="PackedScene" uid="uid://cfn8ki3v0cnec" path="res://UI/bg.tscn" id="2_qajen"]
+[ext_resource type="Texture2D" uid="uid://boc18aqpemsxc" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/gem.png" id="3_6beb7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f355b"]
+atlas = ExtResource("3_6beb7")
+region = Rect2(0, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pj5ku"]
+atlas = ExtResource("3_6beb7")
+region = Rect2(15, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0myw4"]
+atlas = ExtResource("3_6beb7")
+region = Rect2(30, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsrf1"]
+atlas = ExtResource("3_6beb7")
+region = Rect2(45, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gws76"]
+atlas = ExtResource("3_6beb7")
+region = Rect2(60, 0, 15, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6rue"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f355b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pj5ku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0myw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsrf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gws76")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_0tmoe")
@@ -40,9 +84,44 @@ theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 300
 theme_override_constants/margin_bottom = 60
 
-[node name="Continue Button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Continue Container"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Continue Container"]
+layout_mode = 2
+
+[node name="Continue Button Container" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Continue Button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer/Continue Button Container"]
 layout_mode = 2
 text = "Continue"
+
+[node name="Gem Counter" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer/Gem Counter"]
+layout_mode = 2
+
+[node name="Gem Counter Container" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer/Gem Counter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Gem Counter Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer/Gem Counter/HBoxContainer/Gem Counter Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer/Gem Counter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer/Gem Counter/HBoxContainer/MarginContainer2"]
+position = Vector2(30, 19.435)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_o6rue")
 
 [node name="New Game Button Container" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -68,6 +147,6 @@ theme_override_constants/margin_bottom = 60
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Continue Container/Continue Button" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer/Continue Button Container/Continue Button" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/New Game Button Container/New Game Button" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Quit Button Container/Quit Button" to="." method="_on_quit_button_pressed"]
