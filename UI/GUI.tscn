@@ -13,14 +13,14 @@ var paused = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node(\"VBoxContainer/Pause Menu\").hide()
+	$\"Game GUI/VBoxContainer/Menus/Pause Menu\".hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	get_node(\"VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Count/BackGround/Number\").text = str(Game.playerHP)
-	get_node(\"VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Gauge\").value = float( Game.playerHP)
-	get_node(\"VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count/BackGround/Number\").text = str(Game.currentGems)
+	$\"Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter/HealthBar/Count/BackGround/Number\".text = str(Game.playerHP)
+	$\"Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter/HealthBar/Gauge\".value = float( Game.playerHP)
+	$\"Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Counters/Gem Count/BackGround/Number\".text = str(Game.currentGems)
 
 func _input(event):
 	if event.is_action_pressed(\"ui_menu\"):
@@ -36,11 +36,11 @@ func _on_menu_button_pressed():
 
 func pause():
 	if paused:
-		get_node(\"VBoxContainer/Pause Menu\").hide()
+		$\"Game GUI/VBoxContainer/Menus/Pause Menu\".hide()
 		get_tree().paused = false
 		paused = false
 	else:
-		get_node(\"VBoxContainer/Pause Menu\").show()
+		$\"Game GUI/VBoxContainer/Menus/Pause Menu\".show()
 		get_tree().paused = true
 		paused = true
 "
@@ -140,50 +140,57 @@ animations = [{
 
 [node name="GUI" type="MarginContainer"]
 process_mode = 3
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 83.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 script = SubResource("GDScript_a0qls")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Game GUI" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Game GUI"]
 layout_mode = 2
 theme_override_constants/separation = 9
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="Health and Gems Container" type="MarginContainer" parent="Game GUI/VBoxContainer"]
 layout_mode = 2
 
-[node name="Health and Gems" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+[node name="Health and Gems" type="HBoxContainer" parent="Game GUI/VBoxContainer/Health and Gems Container"]
 layout_mode = 2
 
-[node name="Health bar containter" type="MarginContainer" parent="VBoxContainer/MarginContainer/Health and Gems"]
+[node name="Health bar containter" type="MarginContainer" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HealthBar" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter"]
+[node name="HealthBar" type="HBoxContainer" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter"]
 layout_mode = 2
 
-[node name="Count" type="MarginContainer" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar"]
+[node name="Count" type="MarginContainer" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter/HealthBar"]
 layout_mode = 2
 
-[node name="BackGround" type="NinePatchRect" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Count"]
+[node name="BackGround" type="NinePatchRect" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter/HealthBar/Count"]
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 texture = ExtResource("1_uk7i4")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Count/BackGround"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter/HealthBar/Count/BackGround"]
 position = Vector2(0, -10)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_dfujy")
 autoplay = "default"
 centered = false
 
-[node name="Number" type="Label" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar/Count/BackGround"]
+[node name="Number" type="Label" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter/HealthBar/Count/BackGround"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -195,25 +202,25 @@ text = "10"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Gauge" type="TextureProgressBar" parent="VBoxContainer/MarginContainer/Health and Gems/Health bar containter/HealthBar"]
+[node name="Gauge" type="TextureProgressBar" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter/HealthBar"]
 layout_mode = 2
 max_value = 10.0
 value = 10.0
 texture_under = ExtResource("3_1gpp7")
 texture_progress = ExtResource("4_3opk2")
 
-[node name="Counters" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Health and Gems"]
+[node name="Counters" type="HBoxContainer" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems"]
 layout_mode = 2
 
-[node name="Gem Count" type="MarginContainer" parent="VBoxContainer/MarginContainer/Health and Gems/Counters"]
+[node name="Gem Count" type="MarginContainer" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Counters"]
 layout_mode = 2
 
-[node name="BackGround" type="NinePatchRect" parent="VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count"]
+[node name="BackGround" type="NinePatchRect" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Counters/Gem Count"]
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 texture = ExtResource("1_uk7i4")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count/BackGround"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Counters/Gem Count/BackGround"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -222,14 +229,14 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count/BackGround/HBoxContainer"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Counters/Gem Count/BackGround/HBoxContainer"]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_uw4op")
 autoplay = "default"
 centered = false
 offset = Vector2(-10, 0)
 
-[node name="Number" type="Label" parent="VBoxContainer/MarginContainer/Health and Gems/Counters/Gem Count/BackGround"]
+[node name="Number" type="Label" parent="Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Counters/Gem Count/BackGround"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -243,77 +250,121 @@ text = "100
 "
 vertical_alignment = 1
 
-[node name="Pause Menu" type="MarginContainer" parent="VBoxContainer"]
+[node name="Menus" type="MarginContainer" parent="Game GUI/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 300
 theme_override_constants/margin_bottom = 20
 
-[node name="BackGround" type="ColorRect" parent="VBoxContainer/Pause Menu"]
+[node name="Pause Menu" type="MarginContainer" parent="Game GUI/VBoxContainer/Menus"]
+layout_mode = 2
+
+[node name="BackGround" type="ColorRect" parent="Game GUI/VBoxContainer/Menus/Pause Menu"]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 size_flags_vertical = 3
 color = Color(0.447059, 0.447059, 0.447059, 0.972549)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Pause Menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Game GUI/VBoxContainer/Menus/Pause Menu"]
 layout_mode = 2
 
-[node name="Container" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Container6" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+[node name="Container" type="Container" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Pause Label" type="Label" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+[node name="Container6" type="Container" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Pause Label" type="Label" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Pause"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Container2" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+[node name="Container2" type="Container" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Buttons" type="MarginContainer" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+[node name="Buttons" type="MarginContainer" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Pause Menu/VBoxContainer/Buttons"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="Resume Button" type="Button" parent="VBoxContainer/Pause Menu/VBoxContainer/Buttons/HBoxContainer"]
+[node name="Resume Button" type="Button" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Resume"
 
-[node name="Menu Button" type="Button" parent="VBoxContainer/Pause Menu/VBoxContainer/Buttons/HBoxContainer"]
+[node name="Menu Button" type="Button" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Main Menu"
 
-[node name="Container3" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+[node name="Container3" type="Container" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Container4" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+[node name="Container4" type="Container" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Container7" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+[node name="Container7" type="Container" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Container5" type="Container" parent="VBoxContainer/Pause Menu/VBoxContainer"]
+[node name="Container5" type="Container" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[connection signal="pressed" from="VBoxContainer/Pause Menu/VBoxContainer/Buttons/HBoxContainer/Resume Button" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/Pause Menu/VBoxContainer/Buttons/HBoxContainer/Menu Button" to="." method="_on_menu_button_pressed"]
+[node name="Death GUI" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 30
+
+[node name="ColorRect" type="ColorRect" parent="Death GUI"]
+layout_mode = 2
+color = Color(0.447059, 0.447059, 0.447059, 0.972549)
+
+[node name="MarginContainer" type="MarginContainer" parent="Death GUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Death GUI/ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Death GUI/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Death GUI/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "You Died"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Death GUI/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Death GUI/ColorRect/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Win GUI" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[connection signal="pressed" from="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons/HBoxContainer/Resume Button" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons/HBoxContainer/Menu Button" to="." method="_on_menu_button_pressed"]
