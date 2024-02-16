@@ -9,6 +9,8 @@ var levelUnlocked = [
 	false, false, false
 ]
 
+var currentLevel = 0
+
 func newGame():
 	playerHP = 10
 	Gems = 0
@@ -50,3 +52,12 @@ func endGame(dead):
 		Gems += int(float(currentGems) / float(2))
 		Utils.saveGame()
 		Utils.returnToMainMenu()
+
+func setLevel(number):
+	currentLevel = number
+
+func retryLevel():
+	if currentLevel == 0:
+		push_error("Cannot retry Main Menu")
+		return
+	Utils.loadLevel(currentLevel - 1)

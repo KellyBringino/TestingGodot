@@ -11,6 +11,15 @@ script/source = "extends MarginContainer
 
 var paused = false
 
+enum menus {Ingame,Pause,Dead,Win}
+
+const pausemenu = $\"Game GUI/VBoxContainer/Menus/Pause Menu\"
+const gameGUI = $\"Game GUI\"
+const DeathGUI = $\"Death GUI\"
+const WinGUI = $\"Win GUI\"
+var currentMenu = menus.InGame
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$\"Game GUI/VBoxContainer/Menus/Pause Menu\".hide()
@@ -26,13 +35,6 @@ func _input(event):
 	if event.is_action_pressed(\"ui_menu\"):
 		pause()
 
-func _on_resume_button_pressed():
-	if paused:
-		pause()
-
-func _on_menu_button_pressed():
-	get_tree().paused = false
-	Utils.returnToMainMenu()
 
 func pause():
 	if paused:
@@ -43,6 +45,29 @@ func pause():
 		$\"Game GUI/VBoxContainer/Menus/Pause Menu\".show()
 		get_tree().paused = true
 		paused = true
+
+func dead():
+	
+
+func _on_resume_button_pressed():
+	if paused:
+		pause()
+
+func _on_menu_button_pressed():
+	get_tree().paused = false
+	Utils.returnToMainMenu()
+
+func _on_quit_button_pressed():
+	Utils.quitGame()
+
+func _on_main_menu_button_pressed():
+	Utils.returnToMainMenu()
+
+func _on_level_select_button_pressed():
+	Utils.levelSelect()
+
+func _on_try_again_button_pressed():
+	Game.retryLevel()
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h0umk"]
@@ -326,45 +351,222 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Death GUI" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 300
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 300
 theme_override_constants/margin_bottom = 30
 
-[node name="ColorRect" type="ColorRect" parent="Death GUI"]
+[node name="BG" type="ColorRect" parent="Death GUI"]
 layout_mode = 2
 color = Color(0.447059, 0.447059, 0.447059, 0.972549)
 
-[node name="MarginContainer" type="MarginContainer" parent="Death GUI/ColorRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="Death GUI"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Death GUI/ColorRect/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Death GUI/MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Death GUI/ColorRect/MarginContainer/VBoxContainer"]
+[node name="YouDiedContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_top = 50
 
-[node name="Label" type="Label" parent="Death GUI/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="YouDiedLabel" type="Label" parent="Death GUI/MarginContainer/VBoxContainer/YouDiedContainer"]
 layout_mode = 2
 text = "You Died"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="Death GUI/ColorRect/MarginContainer/VBoxContainer"]
+[node name="GemsEarnedContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Death GUI/ColorRect/MarginContainer/VBoxContainer/MarginContainer2"]
+[node name="GemsEarnedLabel" type="Label" parent="Death GUI/MarginContainer/VBoxContainer/GemsEarnedContainer"]
+layout_mode = 2
+text = "Gems earned: _"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GemsKeptContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GemsKeptLabel" type="Label" parent="Death GUI/MarginContainer/VBoxContainer/GemsKeptContainer"]
+layout_mode = 2
+text = "Gems Kept: _"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FourButtonsContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 70
+
+[node name="AllFourButtons" type="VBoxContainer" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer"]
 layout_mode = 2
 
-[node name="Win GUI" type="MarginContainer" parent="."]
+[node name="TopTwoButtonsContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TopTwoButtons" type="HBoxContainer" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer"]
+layout_mode = 2
+
+[node name="TryAgainContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TryAgainButton" type="Button" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons/TryAgainContainer"]
+layout_mode = 2
+text = "Try Again"
+
+[node name="LevelSelectContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelSelectButton" type="Button" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons/LevelSelectContainer"]
+layout_mode = 2
+text = "Level Select"
+
+[node name="BottomTwoButtonsContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BottomTwoButtons" type="HBoxContainer" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer"]
+layout_mode = 2
+
+[node name="MainMenuContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MainMenuButton" type="Button" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons/MainMenuContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="QuitContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuitButton" type="Button" parent="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons/QuitContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="Win GUI" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 30
+
+[node name="BG" type="ColorRect" parent="Win GUI"]
+layout_mode = 2
+color = Color(0.447059, 0.447059, 0.447059, 0.972549)
+
+[node name="MarginContainer" type="MarginContainer" parent="Win GUI"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Win GUI/MarginContainer"]
+layout_mode = 2
+
+[node name="LevelCompltContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 50
+
+[node name="LevelCompltLabel" type="Label" parent="Win GUI/MarginContainer/VBoxContainer/LevelCompltContainer"]
+layout_mode = 2
+text = "Level Complete!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelUnlockContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelUnlockLabel" type="Label" parent="Win GUI/MarginContainer/VBoxContainer/LevelUnlockContainer"]
+layout_mode = 2
+text = "Level _ Unlocked!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GemsEarnedContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GemsEarnedLabel" type="Label" parent="Win GUI/MarginContainer/VBoxContainer/GemsEarnedContainer"]
+layout_mode = 2
+text = "Gems earned: _"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FourButtonsContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 70
+
+[node name="AllFourButtons" type="VBoxContainer" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer"]
+layout_mode = 2
+
+[node name="TopTwoButtonsContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TopTwoButtons" type="HBoxContainer" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer"]
+layout_mode = 2
+
+[node name="TryAgainContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TryAgainButton" type="Button" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons/TryAgainContainer"]
+layout_mode = 2
+text = "Try Again"
+
+[node name="LevelSelectContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelSelectButton" type="Button" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons/LevelSelectContainer"]
+layout_mode = 2
+text = "Level Select"
+
+[node name="BottomTwoButtonsContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BottomTwoButtons" type="HBoxContainer" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer"]
+layout_mode = 2
+
+[node name="MainMenuContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MainMenuButton" type="Button" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons/MainMenuContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="QuitContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuitButton" type="Button" parent="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons/QuitContainer"]
+layout_mode = 2
+text = "Quit"
 
 [connection signal="pressed" from="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons/HBoxContainer/Resume Button" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons/HBoxContainer/Menu Button" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons/TryAgainContainer/TryAgainButton" to="." method="_on_try_again_button_pressed"]
+[connection signal="pressed" from="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons/LevelSelectContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons/MainMenuContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons/QuitContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons/TryAgainContainer/TryAgainButton" to="." method="_on_try_again_button_pressed"]
+[connection signal="pressed" from="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons/LevelSelectContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons/MainMenuContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="Win GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons/QuitContainer/QuitButton" to="." method="_on_quit_button_pressed"]
