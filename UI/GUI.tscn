@@ -13,40 +13,53 @@ var paused = false
 
 enum menus {Ingame,Pause,Dead,Win}
 
-const pausemenu = $\"Game GUI/VBoxContainer/Menus/Pause Menu\"
-const gameGUI = $\"Game GUI\"
-const DeathGUI = $\"Death GUI\"
-const WinGUI = $\"Win GUI\"
-var currentMenu = menus.InGame
+@onready var pausemenu = $\"Game GUI/VBoxContainer/Menus/Pause Menu\"
+
+@onready var gameGUI = $\"Game GUI\"
+@onready var playerHPCounter = $\"Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter/HealthBar/Count/BackGround/Number\"
+@onready var playerHPBar = $\"Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter/HealthBar/Gauge\"
+@onready var gemCounter = $\"Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Counters/Gem Count/BackGround/Number\"
+
+@onready var DeathGUI = $\"Death GUI\"
+@onready var WinGUI = $\"Win GUI\"
+var currentMenu
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	currentMenu = menus.Ingame
 	$\"Game GUI/VBoxContainer/Menus/Pause Menu\".hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	$\"Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter/HealthBar/Count/BackGround/Number\".text = str(Game.playerHP)
-	$\"Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Health bar containter/HealthBar/Gauge\".value = float( Game.playerHP)
-	$\"Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Counters/Gem Count/BackGround/Number\".text = str(Game.currentGems)
+	playerHPCounter.text = str(Game.playerHP)
+	playerHPBar.value = float( Game.playerHP)
+	gemCounter.text = str(Game.currentGems)
 
 func _input(event):
-	if event.is_action_pressed(\"ui_menu\"):
+	if event.is_action_pressed(\"ui_menu\") && currentMenu != menus.Dead && currentMenu != menus.Win:
 		pause()
 
 
 func pause():
 	if paused:
-		$\"Game GUI/VBoxContainer/Menus/Pause Menu\".hide()
+		currentMenu = menus.Ingame
+		gameGUI.show()
+		pausemenu.hide()
 		get_tree().paused = false
 		paused = false
 	else:
-		$\"Game GUI/VBoxContainer/Menus/Pause Menu\".show()
+		currentMenu = menus.Pause
+		gameGUI.show()
+		pausemenu.show()
 		get_tree().paused = true
 		paused = true
 
 func dead():
+	currentMenu = menus.Dead
+	gameGUI.hide()
+	DeathGUI.show()
 	
 
 func _on_resume_button_pressed():
