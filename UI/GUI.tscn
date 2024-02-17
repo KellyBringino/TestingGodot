@@ -21,15 +21,25 @@ enum menus {Ingame,Pause,Dead,Win}
 @onready var gemCounter = $\"Game GUI/VBoxContainer/Health and Gems Container/Health and Gems/Counters/Gem Count/BackGround/Number\"
 
 @onready var DeathGUI = $\"Death GUI\"
+@onready var deathGemsEarned = $\"Death GUI/MarginContainer/VBoxContainer/GemsEarnedContainer/GemsEarnedLabel\"
+@onready var deathGemsKept = $\"Death GUI/MarginContainer/VBoxContainer/GemsKeptContainer/GemsKeptLabel\"
+@onready var deathTotalGems = $\"Death GUI/MarginContainer/VBoxContainer/TotalGemsContainer/TotalGemsLabel\"
+
 @onready var WinGUI = $\"Win GUI\"
+@onready var levelUnlock = $\"Win GUI/MarginContainer/VBoxContainer/LevelUnlockContainer/LevelUnlockLabel\"
+@onready var winGemsEarned = $\"Win GUI/MarginContainer/VBoxContainer/GemsEarnedContainer/GemsEarnedLabel\"
+@onready var winTotalGems = $\"Win GUI/MarginContainer/VBoxContainer/TotalGemsContainer/TotalGemsLabel\"
+
 var currentMenu
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	currentMenu = menus.Ingame
-	$\"Game GUI/VBoxContainer/Menus/Pause Menu\".hide()
-
+	gameGUI.show()
+	pausemenu.hide()
+	DeathGUI.hide()
+	WinGUI.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -37,11 +47,12 @@ func _process(_delta):
 	playerHPBar.value = float( Game.playerHP)
 	gemCounter.text = str(Game.currentGems)
 
+#called every input, set here to only do work if the \"ui_menu\" button is pressed
 func _input(event):
 	if event.is_action_pressed(\"ui_menu\") && currentMenu != menus.Dead && currentMenu != menus.Win:
 		pause()
 
-
+#function called to pause the game
 func pause():
 	if paused:
 		currentMenu = menus.Ingame
@@ -56,29 +67,52 @@ func pause():
 		get_tree().paused = true
 		paused = true
 
-func dead():
+#function called by the Game singleton to show the death end screen
+func dead(keptGems):
 	currentMenu = menus.Dead
 	gameGUI.hide()
 	DeathGUI.show()
-	
+	deathGemsEarned.text = \"Gems earned: \" + str(Game.currentGems)
+	deathGemsKept.text = \"Gems Kept: \" + str(keptGems)
+	deathTotalGems.text = \"Total Gems: \" + str(Game.Gems)
 
+#function called by the Game singleton to show the win end screen
+func win(current,unlock,final):
+	currentMenu = menus.Win
+	gameGUI.hide()
+	WinGUI.show()
+	if unlock:
+		levelUnlock.text = \"Level \" + str(current + 1) + \" Unlocked!\"
+	elif final:
+		levelUnlock.text = \"No More Levels to Unlock!\"
+	else:
+		levelUnlock.text = \"Level \" + str(current + 1) + \" is already Unlocked!\"
+	winGemsEarned.text = \"Gems earned: \" + str(Game.currentGems)
+	winTotalGems.text = \"Total Gems: \" + str(Game.Gems)
+
+#called when the pause button labeled resume is pressed
 func _on_resume_button_pressed():
 	if paused:
 		pause()
 
+#called when the pause button labeled main menu is pressed
 func _on_menu_button_pressed():
 	get_tree().paused = false
 	Utils.returnToMainMenu()
 
+#called when the end of game button for quit is pressed
 func _on_quit_button_pressed():
 	Utils.quitGame()
 
+#called when the end of game button for main menu is pressed
 func _on_main_menu_button_pressed():
 	Utils.returnToMainMenu()
 
+#called when the end of game button for level select is pressed
 func _on_level_select_button_pressed():
 	Utils.levelSelect()
 
+#called when the end of game button for try again is pressed
 func _on_try_again_button_pressed():
 	Game.retryLevel()
 "
@@ -414,6 +448,16 @@ text = "Gems Kept: _"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TotalGemsContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TotalGemsLabel" type="Label" parent="Death GUI/MarginContainer/VBoxContainer/TotalGemsContainer"]
+layout_mode = 2
+text = "Total Gems: _"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="FourButtonsContainer" type="MarginContainer" parent="Death GUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -469,7 +513,6 @@ layout_mode = 2
 text = "Quit"
 
 [node name="Win GUI" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 300
 theme_override_constants/margin_top = 30
@@ -516,6 +559,16 @@ size_flags_vertical = 3
 [node name="GemsEarnedLabel" type="Label" parent="Win GUI/MarginContainer/VBoxContainer/GemsEarnedContainer"]
 layout_mode = 2
 text = "Gems earned: _"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TotalGemsContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TotalGemsLabel" type="Label" parent="Win GUI/MarginContainer/VBoxContainer/TotalGemsContainer"]
+layout_mode = 2
+text = "Total Gems: _"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -30,11 +30,13 @@ func quitGame():
 	get_tree().quit()
 
 func returnToMainMenu():
+	Game.setLevel(0)
 	get_tree().change_scene_to_file("res://UI/main.tscn")
 
 func levelSelect():
+	Game.setLevel(0)
 	get_tree().change_scene_to_file("res://UI/level_select.tscn")
 
 func loadLevel(number):
-	Game.setLevel(number + 1)
+	Game.loadGame(number + 1)
 	get_tree().change_scene_to_file(levels[number])

@@ -5,7 +5,7 @@ func _ready():
 		Utils.loadGame()
 		$"CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer/Gem Counter/HBoxContainer/Gem Counter Container/Gem Counter Label".text =  str(Game.Gems)
 	else:
-		get_node("CanvasLayer/MarginContainer/VBoxContainer/Continue Container/Continue Button").disabled = true
+		$"CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer/Continue Button Container/Continue Button".disabled = true
 		$"CanvasLayer/MarginContainer/VBoxContainer/Continue Container/HBoxContainer/Gem Counter/HBoxContainer/Gem Counter Container/Gem Counter Label".text = ""
 
 func _on_continue_button_pressed():

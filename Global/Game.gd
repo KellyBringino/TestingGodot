@@ -4,9 +4,9 @@ var playerHP = 10
 var Gems = 0
 var currentGems = 0
 var levelUnlocked = [
-	true, false, false,
-	false, false, false,
-	false, false, false
+	2, 0, 0,
+	0, 0, 0,
+	0, 0, 0
 ]
 
 var currentLevel = 0
@@ -15,9 +15,9 @@ func newGame():
 	playerHP = 10
 	Gems = 0
 	levelUnlocked = [
-	true, false, false,
-	false, false, false,
-	false, false, false]
+	2, 0, 0,
+	0, 0, 0,
+	0, 0, 0]
 
 func heal(amount):
 	if playerHP < 10:
@@ -46,12 +46,20 @@ func door():
 func endGame(dead):
 	if !dead:
 		Gems += currentGems
+		if levelUnlocked[currentLevel] == 0:
+			levelUnlocked[currentLevel] = 1
 		Utils.saveGame()
-		Utils.returnToMainMenu()
+		get_node("../World/CanvasLayer/GUI").win(currentLevel,levelUnlocked[currentLevel+1]==0,currentLevel==1)
 	else:
-		Gems += int(float(currentGems) / float(2))
+		var keptGems = int(float(currentGems) / float(2))
+		Gems += keptGems
 		Utils.saveGame()
-		Utils.returnToMainMenu()
+		get_node("../World/CanvasLayer/GUI").dead(keptGems)
+
+func loadGame(level):
+	currentGems = 0
+	playerHP = 10
+	currentLevel = level
 
 func setLevel(number):
 	currentLevel = number

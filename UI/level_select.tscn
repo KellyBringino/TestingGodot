@@ -17,12 +17,33 @@ const levelButtons = [
 	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 9\"
 ]
 
+const buttonDesc = [
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 1/MarginContainer/Label\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 2/MarginContainer2/Label\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 3/MarginContainer3/Label\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 4/MarginContainer4/Label\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 5/MarginContainer5/Label\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 6/MarginContainer6/Label\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 7/MarginContainer7/Label\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 8/MarginContainer8/Label\",
+	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 9/MarginContainer9/Label\"
+]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var unl = Game.levelUnlocked
 	for i in range(9):
-		if !unl[i]:
-			get_node(levelButtons[i]).disabled = true
+		print(str(unl[i]))
+		match unl[i]:
+			2.0:
+				get_node(levelButtons[i]).disabled = false
+				get_node(buttonDesc[i]).text = \"\"
+			1.0:
+				get_node(levelButtons[i]).disabled = true
+				get_node(buttonDesc[i]).text = \"pay _ gems to open\"
+			0.0:
+				get_node(levelButtons[i]).disabled = true
+				get_node(buttonDesc[i]).text = \"\"
 
 func _on_main_menu_button_pressed():
 	Utils.returnToMainMenu()
@@ -120,45 +141,180 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 1/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Level 2" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 2/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Level 3" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 3/MarginContainer3"]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Level 4" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 4/MarginContainer4"]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Level 5" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 5/MarginContainer5"]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Level 6" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="MarginContainer6" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 6/MarginContainer6"]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Level 7" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="MarginContainer7" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 7/MarginContainer7"]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Level 8" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="MarginContainer8" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 8/MarginContainer8"]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Level 9" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="MarginContainer9" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 9/MarginContainer9"]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header/Main Menu Container/Main Menu Button" to="CanvasLayer" method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 1" to="CanvasLayer" method="_on_level_1_pressed"]
