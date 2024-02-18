@@ -72,6 +72,7 @@ func dead(keptGems):
 	currentMenu = menus.Dead
 	gameGUI.hide()
 	DeathGUI.show()
+	get_tree().paused = true
 	deathGemsEarned.text = \"Gems earned: \" + str(Game.currentGems)
 	deathGemsKept.text = \"Gems Kept: \" + str(keptGems)
 	deathTotalGems.text = \"Total Gems: \" + str(Game.Gems)
@@ -81,6 +82,7 @@ func win(current,unlock,final):
 	currentMenu = menus.Win
 	gameGUI.hide()
 	WinGUI.show()
+	get_tree().paused = true
 	if unlock:
 		levelUnlock.text = \"Level \" + str(current + 1) + \" Unlocked!\"
 	elif final:
@@ -95,25 +97,24 @@ func _on_resume_button_pressed():
 	if paused:
 		pause()
 
-#called when the pause button labeled main menu is pressed
-func _on_menu_button_pressed():
-	get_tree().paused = false
-	Utils.returnToMainMenu()
-
 #called when the end of game button for quit is pressed
 func _on_quit_button_pressed():
 	Utils.quitGame()
 
 #called when the end of game button for main menu is pressed
 func _on_main_menu_button_pressed():
+	get_tree().paused = false
+	print(\"Hi\")
 	Utils.returnToMainMenu()
 
 #called when the end of game button for level select is pressed
 func _on_level_select_button_pressed():
+	get_tree().paused = false
 	Utils.levelSelect()
 
 #called when the end of game button for try again is pressed
 func _on_try_again_button_pressed():
+	get_tree().paused = false
 	Game.retryLevel()
 "
 
@@ -376,7 +377,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Resume"
 
-[node name="Menu Button" type="Button" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons/HBoxContainer"]
+[node name="Main Menu Button" type="Button" parent="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Main Menu"
@@ -627,7 +628,7 @@ layout_mode = 2
 text = "Quit"
 
 [connection signal="pressed" from="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons/HBoxContainer/Resume Button" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons/HBoxContainer/Menu Button" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="Game GUI/VBoxContainer/Menus/Pause Menu/VBoxContainer/Buttons/HBoxContainer/Main Menu Button" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons/TryAgainContainer/TryAgainButton" to="." method="_on_try_again_button_pressed"]
 [connection signal="pressed" from="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/TopTwoButtonsContainer/TopTwoButtons/LevelSelectContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="Death GUI/MarginContainer/VBoxContainer/FourButtonsContainer/AllFourButtons/BottomTwoButtonsContainer/BottomTwoButtons/MainMenuContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

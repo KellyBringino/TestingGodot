@@ -59,5 +59,9 @@ func damage(amount):
 		await anim.animation_finished
 		Game.endGame(true)
 
+func throw(direction):
+	velocity += direction
+	anim.play("Jump")
+
 func trap():
 	damage(10)
