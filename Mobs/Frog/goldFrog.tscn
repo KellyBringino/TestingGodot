@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://Mobs/Frog/gold_frog.gd" id="1_qb5im"]
 [ext_resource type="Texture2D" uid="uid://cxkrnvwvq2oct" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/enemy-deadth.png" id="2_lwqri"]
-[ext_resource type="Texture2D" uid="uid://c0phkl5xnohs5" path="res://Sprites/Mobs/Gold Frog/Idle/frog-idle-1.png" id="3_bddrj"]
-[ext_resource type="Texture2D" uid="uid://5gs3tpxgesc8" path="res://Sprites/Mobs/Gold Frog/Idle/frog-idle-2.png" id="4_kijkk"]
-[ext_resource type="Texture2D" uid="uid://b2k4k74yenggl" path="res://Sprites/Mobs/Gold Frog/Idle/frog-idle-3.png" id="5_4sp0n"]
-[ext_resource type="Texture2D" uid="uid://dcpgi1nauabqj" path="res://Sprites/Mobs/Gold Frog/Idle/frog-idle-4.png" id="6_qyryy"]
-[ext_resource type="Texture2D" uid="uid://b2f8dnf8pgytt" path="res://Sprites/Mobs/Gold Frog/Jump/frog-jump-1.png" id="7_xhb65"]
-[ext_resource type="Texture2D" uid="uid://bkk15lb1ef1vl" path="res://Sprites/Mobs/Gold Frog/Jump/frog-jump-2.png" id="8_573pp"]
+[ext_resource type="Texture2D" uid="uid://c0phkl5xnohs5" path="res://Sprites/Mobs/Red Frog/Idle/frog-idle-1.png" id="3_bddrj"]
+[ext_resource type="Texture2D" uid="uid://5gs3tpxgesc8" path="res://Sprites/Mobs/Red Frog/Idle/frog-idle-2.png" id="4_kijkk"]
+[ext_resource type="Texture2D" uid="uid://b2k4k74yenggl" path="res://Sprites/Mobs/Red Frog/Idle/frog-idle-3.png" id="5_4sp0n"]
+[ext_resource type="Texture2D" uid="uid://dcpgi1nauabqj" path="res://Sprites/Mobs/Red Frog/Idle/frog-idle-4.png" id="6_qyryy"]
+[ext_resource type="Texture2D" uid="uid://b2f8dnf8pgytt" path="res://Sprites/Mobs/Red Frog/Jump/frog-jump-1.png" id="7_xhb65"]
+[ext_resource type="Texture2D" uid="uid://bkk15lb1ef1vl" path="res://Sprites/Mobs/Red Frog/Jump/frog-jump-2.png" id="8_573pp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r6iqf"]
 atlas = ExtResource("2_lwqri")

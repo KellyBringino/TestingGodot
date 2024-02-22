@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dykw1rtvdc1oy" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/Background/back.png" id="2_nn8w2"]
 [ext_resource type="TileSet" uid="uid://bcslgv4vx132b" path="res://Levels/world1.tres" id="2_xaepj"]
 [ext_resource type="PackedScene" uid="uid://b7uex0uqnjywk" path="res://Mobs/Frog/frog.tscn" id="4_jcv1k"]
-[ext_resource type="PackedScene" uid="uid://chsrxhxrmrhg8" path="res://Player/Player.tscn" id="5_2wj06"]
+[ext_resource type="PackedScene" uid="uid://chsrxhxrmrhg8" path="res://Player/player.tscn" id="5_2wj06"]
 [ext_resource type="PackedScene" uid="uid://bioc3v8hqtola" path="res://Items/Cherry.tscn" id="6_5w5ew"]
 [ext_resource type="PackedScene" uid="uid://drl8eve0lfv7f" path="res://UI/GUI.tscn" id="7_s7cjv"]
 [ext_resource type="PackedScene" uid="uid://dbp2wcj1c056a" path="res://Items/Gem.tscn" id="8_8aysw"]
