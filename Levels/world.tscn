@@ -1107,5 +1107,7 @@ offset_left = -322.0
 offset_right = -322.0
 offset_bottom = 93.0
 
-[node name="door" parent="." instance=ExtResource("12_1ks1p")]
+[node name="Interactables" type="Node2D" parent="."]
+
+[node name="door" parent="Interactables" instance=ExtResource("12_1ks1p")]
 position = Vector2(3171, 352)

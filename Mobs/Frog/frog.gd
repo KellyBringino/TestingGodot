@@ -74,9 +74,8 @@ func _on_player_death_body_entered(body):
 #when player runs into frog
 func _on_player_collision_body_entered(body):
 	if body.editor_description.contains("Player") && !fading:
-		body.damage(3)
 		var direction = (player.position - self.position).normalized()
-		body.throw(direction * damageBounce)
+		body.throwAndDamage(direction * damageBounce, 3)
 		death()
 
 #when frog dies

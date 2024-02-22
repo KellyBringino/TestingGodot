@@ -10,6 +10,7 @@ const jumpBoost = 400
 var chase = false
 var fading = false
 var jumpTimer = false
+var health = 3.0
 
 @onready var player = get_node("../../Player/Player")
 @onready var anim = get_node("AnimationPlayer")
@@ -69,7 +70,9 @@ func _on_player_death_body_entered(body):
 	if body.editor_description.contains("Player") && !fading:
 		var direction = (player.position - self.position).normalized()
 		body.velocity += direction * headBounce
-		death()
+		health -= 1
+		if health <= 0:
+			death()
 
 #when player runs into frog
 func _on_player_collision_body_entered(body):
@@ -86,6 +89,7 @@ func death():
 	get_node("CollisionShape2D").set_process(false)
 	anim.play("Death")
 	await anim.animation_finished
+	$"../../Interactables/door".unlock()
 	self.queue_free()
 
 func _on_timer_timeout():

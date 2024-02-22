@@ -222,14 +222,14 @@ _data = {
 "RESET": SubResource("Animation_8dc4x")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_w8hpu"]
-radius = 6.1
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nu4yj"]
+size = Vector2(20, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7a18r"]
 size = Vector2(14, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h37kd"]
-size = Vector2(20, 9)
+size = Vector2(24.3333, 9)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_myrnu"]
 radius = 233.054
@@ -257,9 +257,9 @@ wait_time = 3.0
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -18)
+position = Vector2(0, -16.5)
 scale = Vector2(3, 3)
-shape = SubResource("CircleShape2D_w8hpu")
+shape = SubResource("RectangleShape2D_nu4yj")
 debug_color = Color(0, 0.647059, 0.207843, 0.419608)
 
 [node name="Player Death" type="Area2D" parent="."]
@@ -274,6 +274,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 position = Vector2(0, -13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player Collision"]
+position = Vector2(-1.5, 0)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_h37kd")
 debug_color = Color(0.992157, 0, 0.235294, 0.419608)

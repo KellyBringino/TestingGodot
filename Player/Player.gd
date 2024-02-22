@@ -63,5 +63,9 @@ func throw(direction):
 	velocity += direction
 	anim.play("Jump")
 
+func throwAndDamage(direction,amount):
+	velocity += direction
+	damage(amount)
+
 func trap():
 	damage(10)
