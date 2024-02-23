@@ -80,7 +80,6 @@ func _on_player_collision_body_entered(body):
 		body.damage(3)
 		var direction = (player.position - self.position).normalized()
 		body.velocity += direction * damageBounce
-		death()
 
 #when frog dies
 func death():
