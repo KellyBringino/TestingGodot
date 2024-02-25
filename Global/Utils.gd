@@ -3,7 +3,7 @@ extends Node
 const SAVE_PATH = "res://Save/savegame.bin"
 
 const levels = [
-	"res://Levels/world_2.tscn",
+	"res://Levels/world.tscn",
 	"res://Levels/world_2.tscn"
 ]
 

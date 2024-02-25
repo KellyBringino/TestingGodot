@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bksu3spul3cq3"]
+[gd_scene load_steps=13 format=3 uid="uid://bksu3spul3cq3"]
 
 [ext_resource type="TileSet" uid="uid://onrowfptawsx" path="res://Levels/world2.tres" id="1_4jk1c"]
 [ext_resource type="Texture2D" uid="uid://cjn0lxirobvcf" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/Props/sign.png" id="1_8g45e"]
@@ -6,10 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://dmtehx0y5oj21" path="res://Mobs/Frog/redFrog.tscn" id="4_b1nje"]
 [ext_resource type="Script" path="res://UI/BG.gd" id="4_d8l6o"]
 [ext_resource type="Texture2D" uid="uid://dykw1rtvdc1oy" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/Background/back.png" id="5_0mh0y"]
+[ext_resource type="PackedScene" uid="uid://bndy5rav0g0hg" path="res://Mobs/Frog/goldFrog.tscn" id="5_ys2fa"]
 [ext_resource type="PackedScene" uid="uid://drl8eve0lfv7f" path="res://UI/GUI.tscn" id="6_lc6m6"]
 [ext_resource type="PackedScene" uid="uid://dbp2wcj1c056a" path="res://Items/Gem.tscn" id="6_pc6rs"]
 [ext_resource type="PackedScene" uid="uid://bioc3v8hqtola" path="res://Items/Cherry.tscn" id="7_5nrne"]
 [ext_resource type="PackedScene" uid="uid://tp2i7nbhkth4" path="res://Hazards/SpikeTrap.tscn" id="8_2wxsf"]
+[ext_resource type="PackedScene" uid="uid://cj123n8si8xqh" path="res://Interactables/door.tscn" id="12_ngyg7"]
 
 [node name="World" type="Node2D"]
 
@@ -72,6 +74,9 @@ position = Vector2(2168, 231)
 
 [node name="Red Frog4" parent="Mobs" instance=ExtResource("4_b1nje")]
 position = Vector2(2317, 212)
+
+[node name="Gold Frog" parent="Mobs" instance=ExtResource("5_ys2fa")]
+position = Vector2(2937, 260)
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -229,7 +234,6 @@ position = Vector2(1512, 440)
 position = Vector2(1528, 440)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 offset = Vector2(310, 0)
 transform = Transform2D(1, 0, 0, 1, 310, 0)
 
@@ -250,3 +254,8 @@ centered = false
 offset_left = -322.0
 offset_right = -322.0
 offset_bottom = 93.0
+
+[node name="Interactables" type="Node2D" parent="."]
+
+[node name="door" parent="Interactables" instance=ExtResource("12_ngyg7")]
+position = Vector2(3171, 352)

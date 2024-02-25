@@ -31,8 +31,17 @@ func damage(amount):
 	else:
 		playerHP -= amount
 
-func frogDefeated():
-	currentGems += 3
+func frogDefeated(color):
+	match color:
+		"green":
+			currentGems += 3
+		"red":
+			currentGems += 4
+		"gold":
+			currentGems += 25
+
+func goldCreatureDefeated():
+	$"../World/Interactables/door".unlock()
 
 func gemPickup():
 	currentGems += 5
