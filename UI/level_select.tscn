@@ -1,6 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5ldm07fxoj28"]
+[gd_scene load_steps=9 format=3 uid="uid://c5ldm07fxoj28"]
 
 [ext_resource type="PackedScene" uid="uid://cfn8ki3v0cnec" path="res://UI/bg.tscn" id="1_hatvj"]
+[ext_resource type="Texture2D" uid="uid://bgk1e0nlbvs7m" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/gem/gem-1.png" id="2_5ws25"]
+[ext_resource type="Texture2D" uid="uid://bjo2svy1w1uwd" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/gem/gem-2.png" id="3_ucxp5"]
+[ext_resource type="Texture2D" uid="uid://0wrgmcwgnle3" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/gem/gem-3.png" id="4_qbbl6"]
+[ext_resource type="Texture2D" uid="uid://cthl8b27hm4hg" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/gem/gem-4.png" id="5_rt70x"]
+[ext_resource type="Texture2D" uid="uid://dtwi0cyx75nf4" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/gem/gem-5.png" id="6_xw3oj"]
 
 [sub_resource type="GDScript" id="GDScript_4mq6k"]
 script/source = "extends CanvasLayer
@@ -34,16 +39,18 @@ func _ready():
 	var unl = Game.levelUnlocked
 	for i in range(9):
 		print(str(unl[i]))
-		match unl[i]:
-			2.0:
+		match str(unl[i]):
+			\"2\":
 				get_node(levelButtons[i]).disabled = false
-				get_node(buttonDesc[i]).text = \"\"
-			1.0:
+				get_node(buttonDesc[i]).text = \"Play Level \" + str(i + 1)
+			\"1\":
 				get_node(levelButtons[i]).disabled = true
-				get_node(buttonDesc[i]).text = \"pay _ gems to open\"
-			0.0:
+				get_node(buttonDesc[i]).text = \"pay \" + str(Game.unlockValue[i]) + \" gems to open\"
+			\"0\":
 				get_node(levelButtons[i]).disabled = true
-				get_node(buttonDesc[i]).text = \"\"
+				get_node(buttonDesc[i]).text = \"Level \" + str(i + 1) + \" locked\"
+	var gemcounterlabel = $\"MarginContainer/VBoxContainer/Header Container/Header/MarginContainer3/HBoxContainer/MarginContainer2/Label\"
+	gemcounterlabel.text = str(Game.Gems)
 
 func _on_main_menu_button_pressed():
 	Utils.returnToMainMenu()
@@ -51,7 +58,53 @@ func _on_main_menu_button_pressed():
 func _on_level_1_pressed():
 	Utils.loadLevel(0)
 
+func _on_level_2_pressed():
+	Utils.loadLevel(1)
+
+func _on_level_3_pressed():
+	Utils.loadLevel(2)
+
+func _on_level_4_pressed():
+	Utils.loadLevel(3)
+
+func _on_level_5_pressed():
+	Utils.loadLevel(4)
+
+func _on_level_6_pressed():
+	Utils.loadLevel(5)
+
+func _on_level_7_pressed():
+	Utils.loadLevel(6)
+
+func _on_level_8_pressed():
+	Utils.loadLevel(7)
+
+func _on_level_9_pressed():
+	Utils.loadLevel(8)
 "
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4oqpm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5ws25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ucxp5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qbbl6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rt70x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xw3oj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Level Select" type="Node2D"]
 
@@ -111,6 +164,30 @@ vertical_alignment = 1
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header/MarginContainer3"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header/MarginContainer3/HBoxContainer/MarginContainer"]
+position = Vector2(15, 15)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_4oqpm")
+autoplay = "default"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header/MarginContainer3/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "???"
+vertical_alignment = 1
 
 [node name="Level Buttons and BG Container" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -318,3 +395,11 @@ autowrap_mode = 2
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Header Container/Header/Main Menu Container/Main Menu Button" to="CanvasLayer" method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 1" to="CanvasLayer" method="_on_level_1_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 2" to="CanvasLayer" method="_on_level_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 3" to="CanvasLayer" method="_on_level_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 4" to="CanvasLayer" method="_on_level_4_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 5" to="CanvasLayer" method="_on_level_5_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 6" to="CanvasLayer" method="_on_level_6_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 7" to="CanvasLayer" method="_on_level_7_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 8" to="CanvasLayer" method="_on_level_8_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 9" to="CanvasLayer" method="_on_level_9_pressed"]

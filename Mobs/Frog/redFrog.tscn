@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://Mobs/Frog/red_frog.gd" id="1_1qndd"]
 [ext_resource type="Texture2D" uid="uid://cxkrnvwvq2oct" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/enemy-deadth.png" id="2_uw2cl"]
-[ext_resource type="Texture2D" uid="uid://1li1p8tf4oo" path="res://Sprites/Mobs/Red Frog/idle/frog-idle-1.png" id="3_5ouwf"]
-[ext_resource type="Texture2D" uid="uid://d3k0h305k1p5d" path="res://Sprites/Mobs/Red Frog/idle/frog-idle-2.png" id="4_clrf3"]
-[ext_resource type="Texture2D" uid="uid://olot78uc0ry1" path="res://Sprites/Mobs/Red Frog/idle/frog-idle-3.png" id="5_2eokv"]
-[ext_resource type="Texture2D" uid="uid://d3tkspsst11ki" path="res://Sprites/Mobs/Red Frog/idle/frog-idle-4.png" id="6_jyncr"]
-[ext_resource type="Texture2D" uid="uid://dn20217c4dlk0" path="res://Sprites/Mobs/Red Frog/jump/frog-jump-1.png" id="7_tqox5"]
-[ext_resource type="Texture2D" uid="uid://cchbcnc7xnir6" path="res://Sprites/Mobs/Red Frog/jump/frog-jump-2.png" id="8_oev2l"]
+[ext_resource type="Texture2D" uid="uid://1li1p8tf4oo" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-1.png" id="3_5ouwf"]
+[ext_resource type="Texture2D" uid="uid://d3k0h305k1p5d" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-2.png" id="4_clrf3"]
+[ext_resource type="Texture2D" uid="uid://olot78uc0ry1" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-3.png" id="5_2eokv"]
+[ext_resource type="Texture2D" uid="uid://d3tkspsst11ki" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-4.png" id="6_jyncr"]
+[ext_resource type="Texture2D" uid="uid://dn20217c4dlk0" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/frog/jump/frog-jump-1.png" id="7_tqox5"]
+[ext_resource type="Texture2D" uid="uid://cchbcnc7xnir6" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/frog/jump/frog-jump-2.png" id="8_oev2l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r6iqf"]
 atlas = ExtResource("2_uw2cl")
@@ -408,7 +408,7 @@ size = Vector2(14, 13)
 size = Vector2(20, 9)
 
 [node name="Red Frog" type="CharacterBody2D"]
-editor_description = "Frog"
+editor_description = "Frog, Enemy"
 script = ExtResource("1_1qndd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

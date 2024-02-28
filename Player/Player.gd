@@ -5,6 +5,9 @@ const JUMP_VELOCITY = -400.0
 
 var fading = false
 var stunned = false
+var attackUnlocked = false
+var attackTimer = true
+var nearbyObjects = []
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -13,6 +16,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	anim.play("Idle")
 	Game.playerHP = 10
+	attackUnlocked = Game.getAttackUnlock()
 
 func _physics_process(delta):
 	if !fading:
@@ -22,8 +26,10 @@ func _physics_process(delta):
 
 		# Handle jump.
 		if Input.is_action_just_pressed("jump") and is_on_floor() and !stunned:
-			velocity.y = JUMP_VELOCITY
-			anim.play("Jump")
+			jump()
+		
+		if Input.is_action_just_pressed("attack") && attackUnlocked && attackTimer:
+			attack()
 
 		# Get the input direction and handle the movement/deceleration.
 		if !stunned:
@@ -43,8 +49,23 @@ func _physics_process(delta):
 					anim.play("Idle")
 			if velocity.y > 0:
 				anim.play("Fall")
-
 		move_and_slide()
+
+func jump():
+	velocity.y = JUMP_VELOCITY
+	anim.play("Jump")
+
+func attack():
+	stunned = true
+	anim.play("Attack")
+	await anim.animation_finished
+	stunned = false
+	anim.play("Idle")
+	for index in nearbyObjects.size():
+		if nearbyObjects[index].editor_description.contains("Destroy"):
+			nearbyObjects[index].destroy()
+	attackTimer = false
+	$"Attack Timer".start()
 
 func damage(amount):
 	Game.damage(amount)
@@ -69,3 +90,15 @@ func throwAndDamage(direction,amount):
 
 func trap():
 	damage(10)
+
+func _on_object_detect_body_entered(body):
+	nearbyObjects.append(body)
+
+func _on_object_detect_body_exited(body):
+	for index in nearbyObjects.size():
+		if nearbyObjects[index] == body:
+			nearbyObjects.remove_at(index)
+			break
+
+func _on_attack_timer_timeout():
+	attackTimer = true

@@ -286,7 +286,7 @@ size = Vector2(14, 13)
 size = Vector2(20, 9)
 
 [node name="Frog" type="CharacterBody2D"]
-editor_description = "Frog"
+editor_description = "Frog, Enemy"
 script = ExtResource("1_uk8uc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

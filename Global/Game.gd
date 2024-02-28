@@ -3,13 +3,21 @@ extends Node
 var playerHP = 10
 var Gems = 0
 var currentGems = 0
+var currentLevel = 0
+var attackUnlock = true
+var climbUnlock = false
+var lockpickUnlock = false
 var levelUnlocked = [
 	2, 0, 0,
 	0, 0, 0,
 	0, 0, 0
 ]
 
-var currentLevel = 0
+const unlockValue = [
+	0, 150, 300,
+	500, 700, 900,
+	1000, 1200, 1500
+]
 
 func newGame():
 	playerHP = 10
@@ -30,6 +38,15 @@ func damage(amount):
 		playerHP = 0
 	else:
 		playerHP -= amount
+
+func getAttackUnlock():
+	return attackUnlock
+
+func getClimbUnlock():
+	return climbUnlock
+
+func getLockpickUnlock():
+	return lockpickUnlock
 
 func frogDefeated(color):
 	match color:
@@ -78,3 +95,11 @@ func retryLevel():
 		push_error("Cannot retry Main Menu")
 		return
 	Utils.loadLevel(currentLevel - 1)
+
+func unlockLevel(number):
+	if (levelUnlocked[number] != 1) || Gems < unlockValue[number]:
+		return false
+	else:
+		Gems -= unlockValue[number]
+		levelUnlocked[number] = 2
+		return true

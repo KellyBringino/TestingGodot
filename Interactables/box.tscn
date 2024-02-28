@@ -1,0 +1,166 @@
+[gd_scene load_steps=15 format=3 uid="uid://bshbrpe123hqn"]
+
+[ext_resource type="Script" path="res://Interactables/destructable.gd" id="1_3p7mx"]
+[ext_resource type="Texture2D" uid="uid://d4b70yqr254im" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/Props/crate.png" id="2_kbujk"]
+[ext_resource type="Texture2D" uid="uid://b7vufw0tqyctk" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-1.png" id="3_fvvfs"]
+[ext_resource type="Texture2D" uid="uid://bhed5ndsccmb2" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-2.png" id="4_jqexj"]
+[ext_resource type="Texture2D" uid="uid://y7pg28wyxqs" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-3.png" id="5_ssu5u"]
+[ext_resource type="Texture2D" uid="uid://bt7q0ksiv0lgr" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-4.png" id="6_4semx"]
+[ext_resource type="Texture2D" uid="uid://d2d75imc8iq3r" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-5.png" id="7_ex03e"]
+[ext_resource type="Texture2D" uid="uid://di4vagwm4d8nq" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-6.png" id="8_1tdip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5cfxc"]
+size = Vector2(16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_quc3k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kbujk")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fvvfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jqexj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ssu5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4semx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ex03e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_1tdip")
+}],
+"loop": true,
+"name": &"Destroy",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_hl4v7"]
+resource_name = "Default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_47imm"]
+resource_name = "Destroy"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Destroy"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_ei8o1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rcl17"]
+_data = {
+"Default": SubResource("Animation_hl4v7"),
+"Destroy": SubResource("Animation_47imm"),
+"RESET": SubResource("Animation_ei8o1")
+}
+
+[node name="Box" type="StaticBody2D"]
+editor_description = "Destroy"
+script = ExtResource("1_3p7mx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5cfxc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_quc3k")
+animation = &"Default"
+autoplay = "Default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rcl17")
+}
+autoplay = "Default"

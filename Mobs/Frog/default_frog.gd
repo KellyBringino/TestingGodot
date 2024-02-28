@@ -91,10 +91,14 @@ func move():
 #when frog dies
 func death(animName):
 	fading = true
-	get_node("CollisionShape2D").set_process(false)
+	get_node("CollisionShape2D").set_deferred("disabled", true)
 	anim.play(animName)
 	await anim.animation_finished
 	self.queue_free()
+
+func trap():
+	health = 0
+	death("Death")
 
 func _on_timer_timeout():
 	jumpTimer = true
