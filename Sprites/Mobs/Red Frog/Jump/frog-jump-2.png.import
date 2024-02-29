@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cchbcnc7xnir6"
-path="res://.godot/imported/frog-jump-2.png-90a55f173015166904be170ddd68dc45.ctex"
+path="res://.godot/imported/frog-jump-2.png-8c6e39e9f9d64e403c1f46bf35274fec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Mobs/Red Frog/Jump/frog-jump-2.png"
-dest_files=["res://.godot/imported/frog-jump-2.png-90a55f173015166904be170ddd68dc45.ctex"]
+source_file="res://Sprites/Mobs/Red Frog/jump/frog-jump-2.png"
+dest_files=["res://.godot/imported/frog-jump-2.png-8c6e39e9f9d64e403c1f46bf35274fec.ctex"]
 
 [params]
 
