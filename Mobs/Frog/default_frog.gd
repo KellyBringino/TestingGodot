@@ -7,13 +7,14 @@ const STOP_SPEED = 300.0
 const jumpBoost = 400
 
 var chase = false
-var fading = false
-var stunned = false
 var jumpTimer = false
+var stuck = false
 var health = 1.0
 var damage = 3.0
 var headBounce = 300
 var damageBounce = 200
+enum State {IDLE, JUMPING, ATTACKING, STUNNED, FADING}
+var curState = State.IDLE
 
 @onready var player = get_node("../../Player/Player")
 @onready var anim = get_node("AnimationPlayer")
@@ -23,15 +24,16 @@ func _ready():
 	print("Spawning frog that is")
 
 func _physics_process(delta):
-	if !fading:
+	if curState != State.FADING:
 		#basic physics and movement
-		if not is_on_floor():
+		if not is_on_floor() && !stuck:
 			velocity.y += gravity * delta
-		elif !stunned:
+		
+		if curState != State.STUNNED:
 			move()
 		
-		#handle animationw
-		if !stunned:
+		#handle animation
+		if curState != State.STUNNED:
 			physicsAnims()
 		
 		#flip sprite when moving
@@ -64,7 +66,7 @@ func _on_player_detection_body_exited(body):
 
 #when player jumps on frogs head
 func _on_player_death_body_entered(body):
-	if body.editor_description.contains("Player") && !fading:
+	if body.editor_description.contains("Player") && curState != State.STUNNED:
 		var direction = (player.position - self.position).normalized()
 		body.throw(direction * headBounce)
 		health -= 1
@@ -73,7 +75,7 @@ func _on_player_death_body_entered(body):
 
 #when player runs into frog
 func _on_player_collision_body_entered(body):
-	if body.editor_description.contains("Player") && !fading:
+	if body.editor_description.contains("Player") && curState != State.STUNNED:
 		damagePlayer(body)
 
 #damage the player
@@ -83,19 +85,20 @@ func damagePlayer(body):
 
 #move frog when on the ground
 func move():
-	velocity.x = move_toward(velocity.x, 0, STOP_SPEED)
-	if chase && is_on_floor() && jumpTimer:
-		var direction = (player.position - self.position).normalized()
-		if direction.x > 0:
-			velocity = Vector2(1.0,-1.0).normalized() * jumpBoost
-		elif direction.x < 0:
-			velocity = Vector2(-1.0,-1.0).normalized() * jumpBoost
-		jumpTimer = false
-		$Timer.start()
+	if is_on_floor():
+		velocity.x = move_toward(velocity.x, 0, STOP_SPEED)
+		if chase && is_on_floor() && jumpTimer:
+			var direction = (player.position - self.position).normalized()
+			if direction.x > 0:
+				velocity = Vector2(1.0,-1.0).normalized() * jumpBoost
+			elif direction.x < 0:
+				velocity = Vector2(-1.0,-1.0).normalized() * jumpBoost
+			jumpTimer = false
+			$Timer.start()
 
 #when frog dies
 func death(animName):
-	fading = true
+	curState = State.FADING
 	get_node("CollisionShape2D").set_deferred("disabled", true)
 	anim.play(animName)
 	await anim.animation_finished

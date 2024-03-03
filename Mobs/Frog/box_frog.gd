@@ -1,7 +1,6 @@
 extends Frog
 
 var protected = true
-var jumping = false
 var jumpPoint
 
 func _ready():
@@ -24,13 +23,27 @@ func physicsAnims():
 
 func move():
 	velocity.x = move_toward(velocity.x, 0, STOP_SPEED)
-	if chase && jumpTimer:
-		jumpPoint = $Rays/upRay.get_collision_point()
-		$TongueNode.extend(jumpPoint)
-		jumping = true
 	
-	if jumping && !stunned:
-		global_position = 
+	if chase && jumpTimer:
+		match curState:
+			State.IDLE:
+				jumpPoint = $Rays/upRay.get_collision_point()
+				curState = State.JUMPING
+			State.JUMPING:
+				jumpPoint = player.global_position
+				curState = State.ATTACKING
+		jumpTimer = false
+		$TongueNode.extend(jumpPoint)
+		stuck = true
+	
+	if stuck:
+		global_position = global_position.move_toward(jumpPoint,5.0)
+		if global_position.distance_to(jumpPoint) <= 5:
+			$TongueNode.reached()
+			$Timer.start()
+			if curState == State.ATTACKING:
+				stuck = false
+				curState = State.IDLE
 
 #when frog dies
 func death(animName):
@@ -43,7 +56,7 @@ func _on_player_death_body_entered(body):
 
 func destroy():
 	anim.play("Box_Destroyed")
-	stunned = true
+	curState = State.STUNNED
 	await anim.animation_finished
-	stunned = false
+	curState = State.IDLE
 	protected = false
