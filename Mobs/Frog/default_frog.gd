@@ -8,6 +8,7 @@ const jumpBoost = 400
 
 var chase = false
 var fading = false
+var stunned = false
 var jumpTimer = false
 var health = 1.0
 var damage = 3.0
@@ -26,16 +27,12 @@ func _physics_process(delta):
 		#basic physics and movement
 		if not is_on_floor():
 			velocity.y += gravity * delta
-		else:
+		elif !stunned:
 			move()
 		
-		#handle animation
-		if velocity.y < 0:
-			anim.play("Jump")
-		elif velocity.y > 0:
-			anim.play("Fall")
-		else:
-			anim.play("Idle")
+		#handle animationw
+		if !stunned:
+			physicsAnims()
 		
 		#flip sprite when moving
 		if velocity.x > 0:
@@ -45,6 +42,15 @@ func _physics_process(delta):
 		
 		#make sure frog can move
 		move_and_slide()
+
+func physicsAnims():
+	if velocity.y < 0:
+		anim.play("Jump")
+	elif velocity.y > 0:
+		anim.play("Fall")
+	else:
+		anim.play("Idle")
+	
 
 #when frog can see the player
 func _on_player_detection_body_entered(body):
@@ -85,7 +91,6 @@ func move():
 		elif direction.x < 0:
 			velocity = Vector2(-1.0,-1.0).normalized() * jumpBoost
 		jumpTimer = false
-		anim.play("Jump")
 		$Timer.start()
 
 #when frog dies

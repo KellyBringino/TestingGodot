@@ -7,6 +7,18 @@ var currentLevel = 0
 var attackUnlock = true
 var climbUnlock = false
 var lockpickUnlock = false
+var boxUnlocks = [
+	false,false,false
+]
+var climbUnlocks = [
+	false,false,false,
+	false,false,false
+]
+var pickUnlocks = [
+	false,false,false,
+	false,false,false,
+	false,false,false
+]
 var levelUnlocked = [
 	2, 0, 0,
 	0, 0, 0,
@@ -56,9 +68,19 @@ func frogDefeated(color):
 			currentGems += 4
 		"gold":
 			currentGems += 25
+			goldCreatureDefeated()
+		"box":
+			currentGems += 10
+			unlockCreatureDefeated("box")
 
 func goldCreatureDefeated():
 	$"../World/Interactables/door".unlock()
+
+func unlockCreatureDefeated(type):
+	match type:
+		"box":
+			boxUnlocks[currentLevel] = true
+			Utils.saveGame()
 
 func gemPickup():
 	currentGems += 5

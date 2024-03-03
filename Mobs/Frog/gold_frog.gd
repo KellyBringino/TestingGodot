@@ -8,5 +8,4 @@ func _ready():
 #when frog dies
 func death(animName):
 	Game.frogDefeated("gold")
-	Game.goldCreatureDefeated()
 	super.death(animName)
