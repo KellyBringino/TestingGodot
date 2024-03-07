@@ -13,14 +13,14 @@ var health = 1.0
 var damage = 3.0
 var headBounce = 300
 var damageBounce = 200
-enum State {IDLE, JUMPING, ATTACKING, STUNNED, FADING}
+enum State {IDLE, JUMPING, ATTACKING, STUNNED, STUCK, FADING}
 var curState = State.IDLE
 
 @onready var player = get_node("../../Player/Player")
 @onready var anim = get_node("AnimationPlayer")
 
 func _ready():
-	anim.play("Idle")
+	animate("Idle",true, false)
 	print("Spawning frog that is")
 
 func _physics_process(delta):
@@ -47,11 +47,11 @@ func _physics_process(delta):
 
 func physicsAnims():
 	if velocity.y < 0:
-		anim.play("Jump")
+		animate("Jump", false, false)
 	elif velocity.y > 0:
-		anim.play("Fall")
+		animate("Fall",false, false)
 	else:
-		anim.play("Idle")
+		animate("Idle",true, false)
 	
 
 #when frog can see the player
@@ -100,7 +100,7 @@ func move():
 func death(animName):
 	curState = State.FADING
 	get_node("CollisionShape2D").set_deferred("disabled", true)
-	anim.play(animName)
+	animate(animName,false, false)
 	await anim.animation_finished
 	self.queue_free()
 
@@ -110,3 +110,12 @@ func trap():
 
 func _on_timer_timeout():
 	jumpTimer = true
+
+func animate(animname, loop, bypass):
+	if anim.current_animation != animname || bypass:
+		anim.play(animname)
+		if loop:
+			anim.get_animation(anim.current_animation).loop_mode = 1
+		else:
+			anim.get_animation(anim.current_animation).loop_mode = 0
+		#print(animname + ", " + anim.current_animation)
