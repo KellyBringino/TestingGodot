@@ -12,8 +12,5 @@ func destroy():
 	curState = State.IDLE
 	protected = false
 
-
-
-
 func _on_animated_sprite_2d_animation_looped():
 	print(anim.current_animation)

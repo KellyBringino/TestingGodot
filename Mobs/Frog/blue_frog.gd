@@ -34,8 +34,16 @@ func move():
 	if chase && jumpTimer:
 		match curState:
 			State.IDLE:
-				jumpPoint = $Rays/upRay.get_collision_point()
 				curState = State.JUMPING
+				if $Rays/upRay.is_colliding():
+					jumpPoint = $Rays/upRay.get_collision_point()
+				elif $Rays/rightRay.is_colliding():
+					jumpPoint = $Rays/rightRay.get_collision_point()
+				elif $Rays/leftRay.is_colliding():
+					jumpPoint = $Rays/leftRay.get_collision_point()
+				else:
+					curState = State.IDLE
+					super.move()
 				if protected:
 					animate("Attack_Pro",false, false)
 				else:
@@ -48,8 +56,9 @@ func move():
 				else:
 					animate("Attack_Down",false, false)
 		jumpTimer = false
-		$TongueNode.extend(jumpPoint)
-		stuck = true
+		if curState != State.IDLE:
+			$TongueNode.extend(jumpPoint)
+			stuck = true
 	
 	if stuck:
 		global_position = global_position.move_toward(jumpPoint,5.0)
