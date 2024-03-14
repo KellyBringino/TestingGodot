@@ -39,5 +39,6 @@ func levelSelect():
 	get_tree().change_scene_to_file("res://UI/level_select.tscn")
 
 func loadLevel(number):
+	print("loading level " + str(number + 1))
 	Game.loadGame(number + 1)
 	get_tree().change_scene_to_file(levels[number])

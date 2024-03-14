@@ -34,17 +34,24 @@ const buttonDesc = [
 	\"MarginContainer/VBoxContainer/Level Buttons and BG Container/Level Buttons Container/Level Buttons/Level 9/MarginContainer9/Label\"
 ]
 
+var unlock = [
+	true,false,false,
+	false,false,false,
+	false,false,false
+]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for i in range(9):
+		unlock[i] = Game.levelUnlocked[i] == 2
 	var unl = Game.levelUnlocked
 	for i in range(9):
-		print(str(unl[i]))
 		match str(unl[i]):
 			\"2\":
 				get_node(levelButtons[i]).disabled = false
 				get_node(buttonDesc[i]).text = \"Play Level \" + str(i + 1)
 			\"1\":
-				get_node(levelButtons[i]).disabled = true
+				get_node(levelButtons[i]).disabled = false
 				get_node(buttonDesc[i]).text = \"pay \" + str(Game.unlockValue[i]) + \" gems to open\"
 			\"0\":
 				get_node(levelButtons[i]).disabled = true
@@ -52,35 +59,43 @@ func _ready():
 	var gemcounterlabel = $\"MarginContainer/VBoxContainer/Header Container/Header/MarginContainer3/HBoxContainer/MarginContainer2/Label\"
 	gemcounterlabel.text = str(Game.Gems)
 
+func buttonFunc(i):
+	if unlock[i]:
+		Utils.loadLevel(i)
+	else:
+		if Game.unlockLevel(i):
+			unlock[i] = true
+			_ready()
+
 func _on_main_menu_button_pressed():
 	Utils.returnToMainMenu()
 
 func _on_level_1_pressed():
-	Utils.loadLevel(0)
+	buttonFunc(0)
 
 func _on_level_2_pressed():
-	Utils.loadLevel(1)
+	buttonFunc(1)
 
 func _on_level_3_pressed():
-	Utils.loadLevel(2)
+	buttonFunc(2)
 
 func _on_level_4_pressed():
-	Utils.loadLevel(3)
+	buttonFunc(3)
 
 func _on_level_5_pressed():
-	Utils.loadLevel(4)
+	buttonFunc(4)
 
 func _on_level_6_pressed():
-	Utils.loadLevel(5)
+	buttonFunc(5)
 
 func _on_level_7_pressed():
-	Utils.loadLevel(6)
+	buttonFunc(6)
 
 func _on_level_8_pressed():
-	Utils.loadLevel(7)
+	buttonFunc(7)
 
 func _on_level_9_pressed():
-	Utils.loadLevel(8)
+	buttonFunc(8)
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4oqpm"]

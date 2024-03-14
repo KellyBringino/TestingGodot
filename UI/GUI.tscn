@@ -29,6 +29,7 @@ enum menus {Ingame,Pause,Dead,Win}
 @onready var levelUnlock = $\"Win GUI/MarginContainer/VBoxContainer/LevelUnlockContainer/LevelUnlockLabel\"
 @onready var winGemsEarned = $\"Win GUI/MarginContainer/VBoxContainer/GemsEarnedContainer/GemsEarnedLabel\"
 @onready var winTotalGems = $\"Win GUI/MarginContainer/VBoxContainer/TotalGemsContainer/TotalGemsLabel\"
+@onready var winBonusGems = $\"Win GUI/MarginContainer/VBoxContainer/BonusGemsContainer/BonusGemsLabel\"
 
 var currentMenu
 
@@ -78,7 +79,7 @@ func dead(keptGems):
 	deathTotalGems.text = \"Total Gems: \" + str(Game.Gems)
 
 #function called by the Game singleton to show the win end screen
-func win(current,unlock,final):
+func win(current,unlock,final,bonus):
 	currentMenu = menus.Win
 	gameGUI.hide()
 	WinGUI.show()
@@ -90,6 +91,7 @@ func win(current,unlock,final):
 	else:
 		levelUnlock.text = \"Level \" + str(current + 1) + \" is already Unlocked!\"
 	winGemsEarned.text = \"Gems earned: \" + str(Game.currentGems)
+	winBonusGems.text = \"Bonus Gems: \" + str(bonus)
 	winTotalGems.text = \"Total Gems: \" + str(Game.Gems)
 
 #called when the pause button labeled resume is pressed
@@ -514,7 +516,6 @@ layout_mode = 2
 text = "Quit"
 
 [node name="Win GUI" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 300
 theme_override_constants/margin_top = 30
@@ -561,6 +562,16 @@ size_flags_vertical = 3
 [node name="GemsEarnedLabel" type="Label" parent="Win GUI/MarginContainer/VBoxContainer/GemsEarnedContainer"]
 layout_mode = 2
 text = "Gems earned: _"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BonusGemsContainer" type="MarginContainer" parent="Win GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BonusGemsLabel" type="Label" parent="Win GUI/MarginContainer/VBoxContainer/BonusGemsContainer"]
+layout_mode = 2
+text = "Bonus Gems: _"
 horizontal_alignment = 1
 vertical_alignment = 1
 

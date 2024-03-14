@@ -771,6 +771,7 @@ rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_gi16y")
 animation = &"Attack_Box"
 autoplay = "Idle"
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -834,7 +835,6 @@ target_position = Vector2(0, 468.69)
 rotation = -3.31613
 target_position = Vector2(0, 468.69)
 
-[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Player detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="Player detection" to="." method="_on_player_detection_body_exited"]

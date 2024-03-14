@@ -93,11 +93,12 @@ func door():
 
 func endGame(dead):
 	if !dead:
-		Gems += currentGems
+		var bonus = playerHP * 3
+		Gems += (currentGems + int(bonus))
 		if levelUnlocked[currentLevel] == 0:
 			levelUnlocked[currentLevel] = 1
 		Utils.saveGame()
-		get_node("../World/CanvasLayer/GUI").win(currentLevel,levelUnlocked[currentLevel+1]==0,currentLevel==1)
+		get_node("../World/CanvasLayer/GUI").win(currentLevel,levelUnlocked[currentLevel]==1,currentLevel==1,int(bonus))
 	else:
 		var keptGems = int(float(currentGems) / float(2))
 		Gems += keptGems
@@ -124,4 +125,5 @@ func unlockLevel(number):
 	else:
 		Gems -= unlockValue[number]
 		levelUnlocked[number] = 2
+		Utils.saveGame()
 		return true
