@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://tp2i7nbhkth4" path="res://Hazards/SpikeTrap.tscn" id="10_pd66j"]
 [ext_resource type="PackedScene" uid="uid://cj123n8si8xqh" path="res://Interactables/door.tscn" id="12_1ks1p"]
 [ext_resource type="PackedScene" uid="uid://bndy5rav0g0hg" path="res://Mobs/Frog/goldFrog.tscn" id="13_u6rim"]
-[ext_resource type="PackedScene" path="res://Interactables/exit_teleporter.tscn" id="13_ujh48"]
+[ext_resource type="PackedScene" uid="uid://b67nfpue1ljhf" path="res://Interactables/exit_teleporter.tscn" id="13_ujh48"]
 [ext_resource type="PackedScene" uid="uid://b65qjww1i1yda" path="res://Interactables/crate.tscn" id="14_6htww"]
 [ext_resource type="PackedScene" uid="uid://bshbrpe123hqn" path="res://Interactables/box.tscn" id="15_1orly"]
 [ext_resource type="PackedScene" uid="uid://da5f68alrijqm" path="res://Mobs/Frog/boxFrog.tscn" id="16_ad72n"]

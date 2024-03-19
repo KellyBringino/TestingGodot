@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://1li1p8tf4oo"
-path="res://.godot/imported/frog-idle-1.png-5320f9c6390f9206fe584ea2cfe989b7.ctex"
+path="res://.godot/imported/frog-idle-1.png-85ea15c1be74c835e5460f8511af36bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Mobs/Red Frog/idle/frog-idle-1.png"
-dest_files=["res://.godot/imported/frog-idle-1.png-5320f9c6390f9206fe584ea2cfe989b7.ctex"]
+source_file="res://Sprites/Mobs/Red Frog/Idle/frog-idle-1.png"
+dest_files=["res://.godot/imported/frog-idle-1.png-85ea15c1be74c835e5460f8511af36bf.ctex"]
 
 [params]
 
