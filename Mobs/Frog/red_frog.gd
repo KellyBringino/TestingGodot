@@ -6,13 +6,11 @@ func _ready():
 	damageBounce = 400
 
 func damagePlayer(body):
-	super.damagePlayer(body)
-	death("Explode")
+	if curState != State.FADING:
+		super.damagePlayer(body)
+		death("Explode")
 
 #when frog dies
 func death(animName):
 	Game.frogDefeated("red")
 	super.death(animName)
-
-func _on_timer_timeout():
-	jumpTimer = true

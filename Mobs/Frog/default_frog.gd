@@ -66,7 +66,7 @@ func _on_player_detection_body_exited(body):
 
 #when player jumps on frogs head
 func _on_player_death_body_entered(body):
-	if body.editor_description.contains("Player") && curState != State.STUNNED:
+	if body.editor_description.contains("Player") && curState != State.STUNNED && curState != State.FADING:
 		var direction = (player.position - self.position).normalized()
 		body.throw(direction * headBounce)
 		health -= 1
@@ -118,4 +118,4 @@ func animate(animname, loop, bypass):
 			anim.get_animation(anim.current_animation).loop_mode = 1
 		else:
 			anim.get_animation(anim.current_animation).loop_mode = 0
-		#print(animname + ", " + anim.current_animation)
+		print(animname + ", " + anim.current_animation)
