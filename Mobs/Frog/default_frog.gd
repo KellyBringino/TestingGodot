@@ -118,4 +118,4 @@ func animate(animname, loop, bypass):
 			anim.get_animation(anim.current_animation).loop_mode = 1
 		else:
 			anim.get_animation(anim.current_animation).loop_mode = 0
-		print(animname + ", " + anim.current_animation)
+		#print(animname + ", " + anim.current_animation)

@@ -5,8 +5,9 @@ func _ready():
 	print("green")
 
 func damagePlayer(body):
-	super.damagePlayer(body)
-	death("Death")
+	if curState != State.FADING:
+		super.damagePlayer(body)
+		death("Death")
 
 #when frog dies
 func death(animName):

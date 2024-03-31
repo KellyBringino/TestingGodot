@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://638rphalbcth"]
+
+[ext_resource type="Script" path="res://Hazards/SpikeTrap.gd" id="1_nvyni"]
+[ext_resource type="Texture2D" uid="uid://cc74yk5i38ji3" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/Props/spikes.png" id="2_4jc0i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aucv8"]
+
+[node name="WideSpikeTrap" type="Area2D"]
+script = ExtResource("1_nvyni")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3.2, 0.8)
+shape = SubResource("RectangleShape2D_aucv8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, 2.5)
+scale = Vector2(1.06333, 1.1)
+texture = ExtResource("2_4jc0i")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(8, 2.5)
+scale = Vector2(1.06333, 1.1)
+texture = ExtResource("2_4jc0i")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-24, 2.5)
+scale = Vector2(1.06333, 1.1)
+texture = ExtResource("2_4jc0i")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(24, 2.5)
+scale = Vector2(1.06333, 1.1)
+texture = ExtResource("2_4jc0i")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
