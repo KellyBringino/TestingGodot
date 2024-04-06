@@ -12,7 +12,10 @@ func saveGame():
 	var data: Dictionary = {
 		"playerHP": Game.playerHP,
 		"Gems": Game.Gems,
-		"Unlocked": Game.levelUnlocked
+		"Unlocked": Game.levelUnlocked,
+		"Attack": Game.attackUnlock,
+		"Climb": Game.climbUnlock,
+		"Lockpick": Game.lockpickUnlock
 	}
 	var jstr = JSON.stringify(data)
 	file.store_line(jstr)
