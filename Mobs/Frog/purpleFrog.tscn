@@ -1,0 +1,131 @@
+[gd_scene load_steps=14 format=3 uid="uid://bytpp7xwidhs"]
+
+[ext_resource type="Script" path="res://Mobs/Frog/purple_frog.gd" id="1_xqpi3"]
+[ext_resource type="Texture2D" uid="uid://bhlhx3xm0bo5q" path="res://Sprites/Mobs/Purple Frog/Idle/purple-frog-idle-1.png" id="2_fg0cc"]
+[ext_resource type="Texture2D" uid="uid://dxcoc3mtysvol" path="res://Sprites/Mobs/Purple Frog/Idle/purple-frog-idle-2.png" id="3_inf04"]
+[ext_resource type="Texture2D" uid="uid://ck2dosfy5i6b1" path="res://Sprites/Mobs/Purple Frog/Idle/purple-frog-idle-3.png" id="4_mxg3p"]
+[ext_resource type="Texture2D" uid="uid://dmpahugmj5bj8" path="res://Sprites/Mobs/Purple Frog/Idle/purple-frog-idle-4.png" id="5_wqr5y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pib48"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fg0cc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_inf04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mxg3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wqr5y")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4431e"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_2xgmg"]
+resource_name = "Idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_sbtdk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a3us7"]
+_data = {
+"Idle": SubResource("Animation_2xgmg"),
+"RESET": SubResource("Animation_sbtdk")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vkq8q"]
+radius = 159.05
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ivav"]
+size = Vector2(14, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1smxu"]
+size = Vector2(20, 9)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_xqpi3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_pib48")
+animation = &"Idle"
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_4431e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a3us7")
+}
+
+[node name="Player detection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player detection"]
+shape = SubResource("CircleShape2D_vkq8q")
+
+[node name="Player Death" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player Death"]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_8ivav")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Player Collision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player Collision"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_1smxu")
+debug_color = Color(0.992157, 0, 0.235294, 0.419608)
+
+[connection signal="body_entered" from="Player detection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="Player detection" to="." method="_on_player_detection_body_exited"]
+[connection signal="body_entered" from="Player Death" to="." method="_on_player_death_body_entered"]
+[connection signal="body_entered" from="Player Collision" to="." method="_on_player_collision_body_entered"]

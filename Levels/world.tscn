@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://63u5qfftv5h6"]
+[gd_scene load_steps=20 format=3 uid="uid://63u5qfftv5h6"]
 
 [ext_resource type="Script" path="res://UI/BG.gd" id="1_e7a7g"]
 [ext_resource type="Texture2D" uid="uid://dykw1rtvdc1oy" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/environment/Background/back.png" id="2_nn8w2"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b65qjww1i1yda" path="res://Interactables/crate.tscn" id="14_6htww"]
 [ext_resource type="PackedScene" uid="uid://bshbrpe123hqn" path="res://Interactables/box.tscn" id="15_1orly"]
 [ext_resource type="PackedScene" uid="uid://da5f68alrijqm" path="res://Mobs/Frog/boxFrog.tscn" id="16_ad72n"]
+[ext_resource type="PackedScene" uid="uid://bytpp7xwidhs" path="res://Mobs/Frog/purpleFrog.tscn" id="18_lfl4r"]
 
 [sub_resource type="GDScript" id="GDScript_3hqtv"]
 script/source = "extends Node2D
@@ -172,6 +173,9 @@ position = Vector2(3182, 463)
 [node name="Box Frog" parent="Mobs" instance=ExtResource("16_ad72n")]
 position = Vector2(930, 1010)
 
+[node name="CharacterBody2D" parent="Mobs" instance=ExtResource("18_lfl4r")]
+position = Vector2(358, 222)
+
 [node name="Items" type="Node2D" parent="."]
 
 [node name="Gems" type="Node2D" parent="Items"]
@@ -300,7 +304,7 @@ position = Vector2(1064, 1160)
 position = Vector2(-34, 124)
 
 [node name="Player" parent="Player" instance=ExtResource("5_2wj06")]
-position = Vector2(208, 149)
+position = Vector2(212, 95)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 offset = Vector2(310, 0)

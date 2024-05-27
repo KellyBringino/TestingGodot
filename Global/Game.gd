@@ -66,6 +66,8 @@ func frogDefeated(color):
 			currentGems += 3
 		"red":
 			currentGems += 4
+		"purple":
+			currentGems += 5
 		"gold":
 			currentGems += 25
 			goldCreatureDefeated()

@@ -391,13 +391,11 @@ shape = SubResource("CircleShape2D_w8hpu")
 debug_color = Color(0, 0.647059, 0.207843, 0.419608)
 
 [node name="Player detection" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player detection"]
 shape = SubResource("CircleShape2D_myrnu")
 
 [node name="Player Death" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player Death"]
 position = Vector2(0, -6.5)
@@ -405,7 +403,6 @@ shape = SubResource("RectangleShape2D_7a18r")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Player Collision" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player Collision"]
 position = Vector2(0, -4.5)
